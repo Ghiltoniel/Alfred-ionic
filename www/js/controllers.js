@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, userModel, Auth) {
+.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $location, $state, userModel, Auth) {
   // Form data for the login modal
 	$scope.loginData = {};
 
@@ -9,6 +9,9 @@ angular.module('starter.controllers', [])
 		scope: $scope
 	}).then(function(modal) {
 		$scope.modal = modal;
+		if(Auth.getUser() == null){
+			$scope.login();
+		}
 	});
 
 	// Triggered in the login modal to close it
@@ -33,6 +36,7 @@ angular.module('starter.controllers', [])
             $scope.message = 'Login successful !';
 			$scope.modal.hide();
             $scope.$apply();
+			$rootScope.$broadcast("authenticated");
         }
         else if(isOk == 'ko'){
             $scope.error = data;

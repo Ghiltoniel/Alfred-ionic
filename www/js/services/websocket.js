@@ -23,7 +23,6 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
             if(data.Command == 'Unauthorized')
             {
                 localStorage.removeItem('user');
-                location.reload();
             }
             listener(data);
             } catch(e){

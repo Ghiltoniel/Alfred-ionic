@@ -13,4 +13,8 @@ dashboard.controller('light', function ($scope, lightModel) {
 
     $scope.turnAllOn = lightModel.turnAllOn;
     $scope.turnAllOff = lightModel.turnAllOff;
+	
+	$scope.$on('authenticated', function(event, args) {
+		lightModel.getAll();
+	});
 });
