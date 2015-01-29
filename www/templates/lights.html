@@ -1,0 +1,13 @@
+<ion-view view-title="Lights">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="light in lights">
+				<p>{{ light.Name }}</p>
+				<label class="switch-light switch-android">
+					<input type="checkbox" ng-model="test" ng-checked="{{ light.On }}" ng-change="toggle()" class="switch">
+					<span><span>Off</span><span>On</span></span><a></a>
+				</label>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>

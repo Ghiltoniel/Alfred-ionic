@@ -1,0 +1,109 @@
+.switch-android {
+    background-color: #464747;
+    border-radius: 1px;
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0 1px 0;
+}
+
+.switch-light {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30%;
+    height:30px;
+    position: relative;
+    overflow: visible;
+    padding: 0;
+}
+
+.switch-light input {
+    position: absolute;
+    opacity: 0;
+    z-index: 5;
+}
+
+.switch-light * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.switch-light > span {
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    color: #eee;
+}
+
+.switch-light label, .switch-light > span {
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.switch-android.switch-light input:checked ~ span span:first-of-type {
+    opacity: 0;
+}
+
+.switch-android > span span:first-of-type {
+    opacity: 1;
+    margin-left: 0;
+}
+
+.switch-android.switch-toggle, .switch-android > span span {
+    font-size: 85%;
+    text-transform: uppercase;
+}
+
+.switch-android > span span {
+    opacity: 0;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+.switch-light > span span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: block;
+    width: 50%;
+    margin-left: 50%;
+    text-align: center;
+}
+
+.switch-android.switch-light input:checked ~ a {
+    background-color: #0E88B1;
+}
+
+.switch-android.switch-light input:checked ~ span span:last-of-type {
+    opacity: 1;
+}
+
+.switch-light input:checked ~ a {
+    right: 0%;
+}
+
+.switch-android a {
+    background-color: #666;
+    border-radius: 1px;
+    box-shadow: inset rgba(255, 255, 255, 0.2) 0 1px 0, inset rgba(0, 0, 0, 0.3) 0 -1px 0;
+}
+
+.switch-light a {
+    position: absolute;
+    right: 50%;
+    top: 0;
+    z-index: 4;
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+}
+.switch-light a {
+    display: block;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
