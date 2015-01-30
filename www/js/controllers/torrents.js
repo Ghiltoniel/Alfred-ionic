@@ -1,12 +1,13 @@
-dashboard.controller('torrents', function ($scope, torrentsModel) {
+dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel) {
 
     $scope.loading = false;
     $scope.search = function(text){
-        $scope.loading = true;
+		$ionicLoading.show();
         torrentsModel.search(text, function(data){
             $scope.loading = false;
             $scope.results = data.MovieList;
-        });
+			$ionicLoading.hide();
+        });		
     }
     
     $scope.download = function(url){

@@ -1,4 +1,4 @@
-dashboard.controller('user', function ($scope, $location, userModel, Auth) {
+dashboard.controller('user', function ($scope, $location, $ionicLoading, userModel, Auth) {
 
     userModel.subscribe(function(data, isOk){
         if(isOk == 'ok') {
@@ -6,6 +6,7 @@ dashboard.controller('user', function ($scope, $location, userModel, Auth) {
 			Auth.setUser(data);
             $scope.message = 'Login successful !';
             $location.path('/').replace();
+			$ionicLoading.hide();
             $scope.$apply();
         }
         else if(isOk == 'ko'){
@@ -16,11 +17,12 @@ dashboard.controller('user', function ($scope, $location, userModel, Auth) {
 
     $scope.submit = function(){
         userModel.submit($scope.login, $scope.password);
+		$ionicLoading.show({
+			template: 'Loading...'
+		});
     }
 });
 
 dashboard.controller('userInfos', function ($scope, $location, Auth) {
-
     $scope.user = Auth.getUser();
-    
 });

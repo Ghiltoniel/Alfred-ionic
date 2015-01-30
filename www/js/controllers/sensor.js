@@ -1,4 +1,4 @@
-dashboard.controller('sensor', function ($scope, sensorModel, $cookies) {
+dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $cookies) {
 
     var areas = [];
     $scope.loading = true;
@@ -92,8 +92,13 @@ dashboard.controller('sensor', function ($scope, sensorModel, $cookies) {
     sensorModel.getAll();
 });
 
-dashboard.controller('sensorInfos', function ($scope, sensorModel) {
+dashboard.controller('sensorInfos', function ($scope, $ionicLoading, sensorModel, mouvementModel) {
 
+    mouvementModel.subscribe(function(someoneThere){
+        $scope.someoneThere = someoneThere;
+        $scope.$apply();
+    });
+	
     sensorModel.subscribe(function(data, type){
 		if(type == 'sensors') {
             var sensors = data;
@@ -132,8 +137,19 @@ dashboard.controller('sensorInfos', function ($scope, sensorModel) {
                 $scope.humidityComment = 'Everything\'s normal !';
             }
             $scope.$apply();
+			$ionicLoading.hide();
         }
     });
 	
-    sensorModel.getAll();    
+    sensorModel.getAll();
+	$ionicLoading.show({
+		template: 'Loading...'
+	});
+		
+	$scope.$on('authenticated', function(event, args) {
+		sensorModel.getAll();
+		$ionicLoading.show({
+			template: 'Loading...'
+		});
+	});
 });

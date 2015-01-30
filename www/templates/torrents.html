@@ -1,0 +1,19 @@
+<ion-view view-title="Torrents">
+	<ion-content scroll="false">
+		<h3 class="box-title">Download movie</h3>
+		<form ng-submit="search(text)" class="col-sm-12">
+			<div class="list">
+				<label class="item item-input">
+					<input ng-model="text" placeholder="Type message..." class="form-control">
+				</label>
+				<button class="button"><i class="ion-search"></i></button></div>          
+			</div>
+		</form>
+		<div>
+			<div ng-repeat="result in results" class="row torrent-result">
+				<p class="col col-70">{{ result.MovieTitle }}</p>
+				<button ng-click="download(result.TorrentMagnetUrl)" class="button col col-30">Download</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

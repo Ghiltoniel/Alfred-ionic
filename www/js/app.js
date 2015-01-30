@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-dashboard = angular.module('starter', ['ionic', 'starter.controllers']);
+dashboard = angular.module('starter', ['ionic', 'tabSlideBox', 'starter.controllers']);
 
 dashboard
 .run(function($ionicPlatform) {
@@ -57,6 +57,16 @@ dashboard
       'menuContent': {
         templateUrl: "templates/chat.html",
         controller: 'chat'
+      }
+    }
+  })
+
+  .state('app.torrents', {
+    url: "/torrents",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/torrents.html",
+        controller: 'torrents'
       }
     }
   });

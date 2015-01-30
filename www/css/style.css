@@ -1,1 +1,14 @@
 /* Empty. Add your own CSS if you like */
+.tabbed-slidebox .slider-slide{
+	background-color:transparent;
+}
+
+.tabbed-slidebox .tsb-icons:after{
+	border-width: 0 1em 1em 1em;
+	border-color: transparent transparent #ccc transparent;
+	margin-left: -9px;
+}
+
+.tabbed-slidebox .tsb-icons{
+	margin: 14px 0;
+}

@@ -1,0 +1,40 @@
+﻿<!-- small box-->
+<div class="small-box bg-yellow audio_playback">
+    
+    <div class="inner">
+        <h3>
+            <span>Player</span>
+            
+            <button class="audio_playback" ng-click="togglePlayback()" ng-class="registered ? 'active' : ''">
+                <i class="fa fa-volume-off"></i>
+            </button>
+        </h3>
+        <audio id="audio_player"></audio>
+        <div id="audio_controls" ng-show="title">
+            <p class="col-sm-6">{{title}}</p>
+            <p class="col-sm-6">{{artist}}</p>
+            <div class="buttons">
+                <button ng-click="previous()">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <button ng-click="playPause()">
+                    <i ng-class="status.Status != 3 ? 'fa-play' : 'fa-pause'" class="fa"></i>
+                </button>
+                <button ng-click="next()">
+                    <i class="fa fa-forward"></i>
+                </button>
+            </div>
+        </div>
+        <p ng-show="!title">
+            No music playing
+        </p>
+    </div>    
+    
+    <div class="small-box-footer">        
+        <div class="music" ng-show="registered">
+            <span class="title">{{ title }}</span>
+            <span class="artist">{{ artist }}</span>
+        </div>
+    </div>
+     
+</div>

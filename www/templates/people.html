@@ -1,0 +1,14 @@
+
+<div class="box-header">
+ <h3 class="box-title">
+    <!--i.fa.fa-comments-o-->People at home
+ </h3>
+</div>
+<div class="box-body">
+ <div class="row">
+    <div ng-repeat="p in people" class="col-sm-6 people">
+       <p class="col-sm-8">{{ p.Name }}</p>
+       <p class="col-sm-4 {{ p.IsHome ? 'text-success' : 'text-danger'}}">{{ p.IsHome ? 'à la maison' : 'absent'}}</p>
+    </div>
+ </div>
+</div>

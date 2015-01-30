@@ -1,27 +1,58 @@
 <ion-view view-title="Home">
-	<ion-content>
-		<div class="card">
-			<div class="item item-divider">
-				Temperature
+	<ion-content scroll="false">
+		<tab-slide-box>
+			<div class="tsb-icons">
+				<div class="tsb-ic-wrp">
+					<a href="javascript:;" class="ion-thermometer"></a>
+					<a href="javascript:;" class="ion-person-stalker"></a>
+					<a href="javascript:;" class="ion-email"></a>
+				</div>
 			</div>
-			<div class="item item-text-wrap">
-				{{ temperature }}<sup style="font-size: 20px">°C</sup>
-			</div>
-			<div class="item item-divider">
-				{{ temperatureComment }}
-			</div>
-		</div>
-		
-		<div class="card">
-			<div class="item item-divider">
-				Humidity
-			</div>
-			<div class="item item-text-wrap">
-				{{ humidity }}<sup style="font-size: 20px">%</sup>
-			</div>
-			<div class="item item-divider">
-				{{ humidityComment }}
-			</div>
-		</div>
+			<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+				<ion-slide>
+					<h1>Capteurs</h1>
+					<div class="card">
+						<div class="item item-divider">
+							Température
+						</div>
+						<div class="item item-text-wrap">
+							{{ temperature }}<sup style="font-size: 20px">°C</sup>
+						</div>
+						<div class="item item-divider">
+							{{ temperatureComment }}
+						</div>
+					</div>
+					
+					<div class="card">
+						<div class="item item-divider">
+							Humidité
+						</div>
+						<div class="item item-text-wrap">
+							{{ humidity }}<sup style="font-size: 20px">%</sup>
+						</div>
+						<div class="item item-divider">
+							{{ humidityComment }}
+						</div>
+					</div>
+				</ion-slide>
+				<ion-slide>
+					<h1>Home</h1>					
+					<div class="card">
+						<div class="item item-divider">
+							People
+						</div>
+						<div class="item item-text-wrap">				
+							<h3>{{ someoneThere == 'True' ? 'Youpie !' : 'Too bad' }}</h3>
+							{{ someoneThere == 'True' ? 'Someone\'s at the NAM!' : 'The NAM is empty :(' }}
+						</div>
+						<div class="item item-divider">
+							<p>{{ someoneThere == 'True' ? 'Let\'s get started ! :)' : 'Bring friends ASAP !' }}</p>
+						</div>
+					</div>
+				</ion-slide>
+				<ion-slide>
+				</ion-slide>
+			</ion-slide-box>
+		</tab-slide-box>
 	</ion-content>
 </ion-view>

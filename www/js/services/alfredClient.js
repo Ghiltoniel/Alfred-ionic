@@ -2,11 +2,34 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
     // We return this object to anything injecting our service
     var Service = {};
     
+		
 	Service.subscribe = function(callback){
         websocket.subscribe(function(data){
 			callback(data);
         });
     };
+	
+	var events = {};
+    Service.on = function(names, handler) {
+		names.split(' ').forEach(function(name) {
+			if (!events[name]) {
+				events[name] = [];
+			}
+			events[name].push(handler);
+		});
+		return this;
+	};
+    
+	var trigger = function(name, args) {
+		angular.forEach(events[name], function(handler) {
+			handler.call(null, args);
+		});
+		return this;
+	};
+	
+	websocket.subscribe(function(data){
+		trigger();
+	});
 	
     Service.Lights = {
 		lightCommand: function(id, on, bri, hue, sat)

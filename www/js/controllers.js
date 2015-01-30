@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $location, $state, userModel, Auth) {
+.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $ionicModal, $timeout, $location, $state, userModel, Auth) {
   // Form data for the login modal
 	$scope.loginData = {};
 
@@ -21,6 +21,7 @@ angular.module('starter.controllers', [])
 
 	// Open the login modal
 	$scope.login = function() {
+		$ionicLoading.hide();
 		$scope.modal.show();
 	};
 	
