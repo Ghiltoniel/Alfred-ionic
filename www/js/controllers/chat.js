@@ -1,4 +1,4 @@
-dashboard.controller('chat', function ($scope, chatModel) {
+dashboard.controller('chat', function ($scope, $location, $anchorScroll, chatModel) {
     var CHAT_ID = 'chat';
 
     localStorage.setItem(CHAT_ID, '[]');
@@ -16,9 +16,9 @@ dashboard.controller('chat', function ($scope, chatModel) {
         $scope.allChecked = !$scope.remainingCount;
         if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
             localStorage.setItem(CHAT_ID, JSON.stringify(chatMessages));
-            var chatBox = $('#chat-box');
-            chatBox.scrollTop(chatBox[0].scrollHeight);
-        }
+			$location.hash('message-'+chatMessages[chatMessages.length - 1].id);
+			$anchorScroll();        
+		}
     }, true);
 
     $scope.newMessage = {

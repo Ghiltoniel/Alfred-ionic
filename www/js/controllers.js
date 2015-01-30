@@ -23,6 +23,9 @@ angular.module('starter.controllers', [])
 	$scope.login = function() {
 		$scope.modal.show();
 	};
+	
+	$scope.logout = function(){
+	};
 
 	// Perform the login action when the user submits the login form
 	$scope.doLogin = function() {

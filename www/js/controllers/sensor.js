@@ -79,6 +79,7 @@ dashboard.controller('sensor', function ($scope, sensorModel, $cookies) {
                 });
                 existingArea[0].area.setData(graphData);
             }
+            $scope.$apply();
         }
     });
 
@@ -91,9 +92,18 @@ dashboard.controller('sensor', function ($scope, sensorModel, $cookies) {
     sensorModel.getAll();
 });
 
-dashboard.controller('sensorInfos', function ($scope, sensorModel, $cookies) {
+dashboard.controller('sensorInfos', function ($scope, sensorModel) {
 
     sensorModel.subscribe(function(data, type){
+		if(type == 'sensors') {
+            var sensors = data;
+            $scope.sensors = sensors;
+            $scope.sensor = sensors[0];
+
+            sensorModel.getHistory(sensors[0].Id);
+            sensorModel.getHistory(sensors[1].Id);
+            $scope.$apply();
+        }
         if(type == 'history'){
             $scope.loading = false;
             $scope.$apply();
@@ -121,7 +131,9 @@ dashboard.controller('sensorInfos', function ($scope, sensorModel, $cookies) {
                 $scope.humidity = lastValue;
                 $scope.humidityComment = 'Everything\'s normal !';
             }
+            $scope.$apply();
         }
     });
-    
+	
+    sensorModel.getAll();    
 });

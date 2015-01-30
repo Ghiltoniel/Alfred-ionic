@@ -1,32 +1,29 @@
-dashboard.factory('lightModel', ['websocket', function(websocket) {
-    return new LightModel(websocket);
+dashboard.factory('lightModel', ['alfredClient', function(alfredClient) {
+    return new LightModel(alfredClient);
 }]);
 
-function LightModel(websocket){
-    this.websocket = websocket;
+function LightModel(alfredClient){
+    this.alfredClient = alfredClient;
     var me = this;
 
     var toggle = function(id, on){
-        me.websocket.Send("Device_LightCommand", {
-            'id': id,
-            'on': on
-        });
+		alfredClient.Lights.lightCommand(id, on);
     }
 
     var turnAllOn = function(){
-        me.websocket.Send("Device_AllumeTout");
+        alfredClient.Lights.allumeTout();
     }
 
     var turnAllOff = function(){
-        me.websocket.Send("Device_EteinsTout");
+        alfredClient.Lights.eteinsTout();
     }
 
     var getAll = function(){
-        me.websocket.Send("Device_BroadcastLights");
+        alfredClient.Lights.getAll();
     }
 
     var subscribe = function(callback){
-        me.websocket.subscribe(function(data){
+        alfredClient.subscribe(function(data){
             if (data != null
                 && data.Arguments != null
                 && typeof(data.Arguments.lights) != 'undefined') {

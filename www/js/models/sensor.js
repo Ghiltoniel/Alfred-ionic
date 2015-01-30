@@ -1,23 +1,21 @@
-dashboard.factory('sensorModel', ['websocket', function(websocket, $cookies) {
-    return new SensorModel(websocket, $cookies);
+dashboard.factory('sensorModel', ['alfredClient', function(alfredClient) {
+    return new SensorModel(alfredClient);
 }]);
 
-function SensorModel(websocket, $cookies){
-    this.websocket = websocket;
+function SensorModel(alfredClient){
+    this.alfredClient = alfredClient;
     var me = this;
 
     var getAll = function(){
-        me.websocket.Send("Sensor_BroadcastSensors", arguments);
+        me.alfredClient.Sensors.getAll();
     }
 
     var getHistory = function(id){
-        me.websocket.Send("Sensor_BroadcastSensorHistory", {
-            'id': id
-        });
+        me.alfredClient.Sensors.getHistory(id);
     }
 
     var subscribe = function(callback){
-        me.websocket.subscribe(function(data){
+		me.alfredClient.subscribe(function(data){
             if (data != null
                 && data.Arguments != null){
                 if(typeof(data.Arguments.sensors) != 'undefined') {

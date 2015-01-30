@@ -36,38 +36,30 @@ dashboard
     views: {
       'menuContent': {
         templateUrl: "templates/lights.html",
-          controller: 'light'
+        controller: 'light'
       }
     }
   })
 
-  .state('app.search', {
-    url: "/search",
+  .state('app.sensors', {
+    url: "/sensors",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/sensors.html",
+        controller: 'sensorInfos'
       }
     }
   })
 
-  .state('app.browse', {
-    url: "/browse",
+  .state('app.chat', {
+    url: "/chat",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
-      }
-    }
-  })
-
-  .state('app.single', {
-    url: "/playlists/:playlistId",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/chat.html",
+        controller: 'chat'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/lights');
+  $urlRouterProvider.otherwise('/app/sensors');
 });
