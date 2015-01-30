@@ -92,7 +92,7 @@ dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $co
     sensorModel.getAll();
 });
 
-dashboard.controller('sensorInfos', function ($scope, $ionicLoading, sensorModel, mouvementModel) {
+dashboard.controller('sensorInfos', function ($scope, $ionicLoading, sensorModel, mouvementModel, texttospeechModel) {
 
     mouvementModel.subscribe(function(someoneThere){
         $scope.someoneThere = someoneThere;
@@ -152,4 +152,8 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, sensorModel
 			template: 'Loading...'
 		});
 	});
+	
+	$scope.speech = function(){
+        texttospeechModel.run($scope.text);
+    }
 });

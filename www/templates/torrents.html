@@ -1,18 +1,22 @@
 <ion-view view-title="Torrents">
-	<ion-content scroll="false">
-		<h3 class="box-title">Download movie</h3>
+	<ion-content>
 		<form ng-submit="search(text)" class="col-sm-12">
 			<div class="list">
+				<div class="item item-divider">
+					Recherche
+				</div>
 				<label class="item item-input">
-					<input ng-model="text" placeholder="Type message..." class="form-control">
-				</label>
-				<button class="button"><i class="ion-search"></i></button></div>          
+					<input ng-model="text" type="text">
+					<button class="button"><i class="ion-search"></i></button></div>   
+				</label>       
 			</div>
 		</form>
-		<div>
-			<div ng-repeat="result in results" class="row torrent-result">
-				<p class="col col-70">{{ result.MovieTitle }}</p>
-				<button ng-click="download(result.TorrentMagnetUrl)" class="button col col-30">Download</button>
+		<div class="list">
+			<div class="item item-button-right" ng-repeat="result in results" >
+				{{ result.MovieTitle }}
+				<button ng-click="download(result.TorrentMagnetUrl)" class="button button-positive">
+					<i class="ion-ios-cloud-download-outline"></i>
+				</button>
 			</div>
 		</div>
 	</ion-content>

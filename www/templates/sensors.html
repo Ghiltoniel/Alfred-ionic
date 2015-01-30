@@ -49,6 +49,18 @@
 							<p>{{ someoneThere == 'True' ? 'Let\'s get started ! :)' : 'Bring friends ASAP !' }}</p>
 						</div>
 					</div>
+					<form>
+						<h3>Envoyer un message au NAM :</h3>
+						<div class="list">
+							<label class="item item-input">
+								<span class="input-label">Text</span>
+								<input type="text" ng-model="text">
+							</label>
+							<label class="item">
+								<button class="button button-block button-positive" ng-click="speech()" type="submit">Envoyer au NAM !</button>
+							</label>
+						</div>
+					</form>
 				</ion-slide>
 				<ion-slide>
 				</ion-slide>

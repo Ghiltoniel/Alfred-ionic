@@ -11,11 +11,12 @@ dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel)
     }
     
     $scope.download = function(url){
-        $scope.loading = true;
+		$ionicLoading.show();
         torrentsModel.download(url, function(result){
             $scope.loading = false;
             $scope.$apply();
             $scope.results = [];
+			$ionicLoading.hide();
         });
     }
     
