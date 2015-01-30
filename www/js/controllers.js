@@ -26,6 +26,7 @@ angular.module('starter.controllers', [])
 	};
 	
 	$scope.logout = function(){
+		console.log('loging out...');
 	};
 
 	// Perform the login action when the user submits the login form

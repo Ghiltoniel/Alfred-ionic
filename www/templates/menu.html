@@ -8,13 +8,17 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-balanced">
-      <h1 class="title">Left</h1>
+      <h1 class="title">Menu</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
@@ -29,6 +33,19 @@
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/torrents">
           Torrents
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+  
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-balanced">
+      <h1 class="title">Settings</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-item nav-clear menu-close ng-click="logout()">
+          Logout
         </ion-item>
       </ion-list>
     </ion-content>

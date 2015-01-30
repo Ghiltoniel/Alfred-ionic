@@ -1,23 +1,27 @@
 <ion-view view-title="Chat">
 	<ion-content>
-		<div class="box-header">
-		 <h3 class="box-title"><i class="fa fa-comments-o"></i>Chat</h3>
-		</div>
-		<div id="chat-box" class="box-body chat">
-		 <!-- chat item-->
-		 <div ng-repeat="message in chatMessages | orderBy: -id" class="item" id="message-{{ message.id }}">
-			<img ng-src="img/{{ message.user }}.png" alt="user image" class="online">
-			<p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i>{{ message.time }}</small>{{ message.user }}</a>{{ message.message }}</p>
-		 </div>
-		</div>
-		<div class="box-footer">
 		<form ng-submit="addMessage(newMessage.text)">
 			<div class="list">
+				<div class="item item-divider">
+					Messages
+				</div>
+				
+				<div ng-repeat="message in chatMessages | orderBy: -id" class="item message" id="message-{{ message.id }}">
+					<div ng-class-even="'even'">
+						<a class="item" ng-class-even="'item-thumbnail-right'" ng-class-odd="'item-thumbnail-left'" href="#">
+						  <img src="img/{{ message.user }}.png">
+						  <h2>{{ message.user }}</h2>
+						  <p>{{ message.time }}</p>
+						  <p>{{ message.message }}</p>
+						</a>
+					</div>
+				</div>  
+
 				<label class="item item-input item-stacked-label">
 					<input placeholder="Type message..." ng-model="newMessage.text" class="form-control">
-				</label>
+				</label>			
 			</div>
 			<button class="button button-clear"><i class="icon ion-ios-plus"></i></button>
-		</div>
+		</form>
 	</ion-content>
 </ion-view>

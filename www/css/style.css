@@ -7,12 +7,32 @@
 	border-width: 0 1em 1em 1em;
 	border-color: transparent transparent #ccc transparent;
 	margin-left: -9px;
+	bottom: 0px;
 }
 
 .tabbed-slidebox .tsb-icons{
-	margin: 14px 0;
+	margin: 0;
+	padding: 14px 0;
+	background: rgba(0,0,0,0.1);
+}
+
+.tabbed-slidebox .slider {
+	padding-top: 5%;
 }
 
 .row.light{
 	margin: -8px;
+}
+
+.message .even {
+	text-align:right;
+}
+
+.message .item-thumbnail-right, .message .item-thumbnail-left {
+	border: none;
+}
+
+.message img {
+	max-height: 70px !important;
+	max-width: 70px !important;
 }
