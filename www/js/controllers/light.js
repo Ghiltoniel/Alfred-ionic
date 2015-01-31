@@ -8,7 +8,7 @@ dashboard.controller('light', function ($scope, lightModel) {
     lightModel.getAll();
 
     $scope.toggle = function(){
-        lightModel.toggle(this.light.Key, !this.light.On);
+        lightModel.toggle(this.light.Key, this.light.On);
     }
 
     $scope.turnAllOn = lightModel.turnAllOn;

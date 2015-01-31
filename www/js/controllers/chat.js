@@ -1,4 +1,4 @@
-dashboard.controller('chat', function ($scope, $location, $anchorScroll, chatModel) {
+dashboard.controller('chat', function ($scope, $ionicScrollDelegate, chatModel) {
     var CHAT_ID = 'chat';
 
     localStorage.setItem(CHAT_ID, '[]');
@@ -16,8 +16,8 @@ dashboard.controller('chat', function ($scope, $location, $anchorScroll, chatMod
         $scope.allChecked = !$scope.remainingCount;
         if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
             localStorage.setItem(CHAT_ID, JSON.stringify(chatMessages));
-			$location.hash('message-'+chatMessages[chatMessages.length - 1].id);
-			$anchorScroll();        
+			$ionicScrollDelegate.scrollBottom();
+			document.getElementById('newMessage').focus();
 		}
     }, true);
 

@@ -1,10 +1,24 @@
 /* Empty. Add your own CSS if you like */
+
+.bar{
+	padding: 8px;
+	height: 50px;
+}
+
+.bar .title{
+	top: 4px;
+}
+
+.has-header{
+	top: 50px;
+}
+
 .tabbed-slidebox .slider-slide{
 	background-color:transparent;
 }
 
 .tabbed-slidebox .tsb-icons:after{
-	border-width: 0 1em 1em 1em;
+	border-width: 0 0.8em 0.8em 0.8em;
 	border-color: transparent transparent #ccc transparent;
 	margin-left: -9px;
 	bottom: 0px;
@@ -12,8 +26,16 @@
 
 .tabbed-slidebox .tsb-icons{
 	margin: 0;
-	padding: 14px 0;
+	padding: 0;
 	background: rgba(0,0,0,0.1);
+}
+
+.tabbed-slidebox .tsb-icons a {
+	font-size: 2em;
+}
+
+.tabbed-slidebox .tsb-icons a.active {
+	font-size: 3em;
 }
 
 .tabbed-slidebox .slider {
