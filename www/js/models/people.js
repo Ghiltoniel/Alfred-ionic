@@ -19,7 +19,7 @@ function PeopleModel(websocket){
     }
 
     var getAll = function(){
-        me.websocket.Send("People_Broadcast");
+        me.websocket.send("People_Broadcast");
     }
 
     return {

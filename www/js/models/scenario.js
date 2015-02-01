@@ -7,13 +7,13 @@ function ScenarioModel(websocket){
     var me = this;
 
     var run = function(name){
-        me.websocket.Send("Scenario_LaunchScenario", {
+        me.websocket.send("Scenario_LaunchScenario", {
             'mode': name
         });
     }
 
     var getAll = function(){
-        me.websocket.Send("Scenario_BroadcastScenarios");
+        me.websocket.send("Scenario_BroadcastScenarios");
     }
 
     var subscribe = function(callback){

@@ -21,6 +21,10 @@ dashboard.controller('user', function ($scope, $location, $ionicLoading, userMod
 			template: 'Loading...'
 		});
     }
+	
+	$scope.logout = function(){
+		userModel.logout();
+	}
 });
 
 dashboard.controller('userInfos', function ($scope, $location, Auth) {

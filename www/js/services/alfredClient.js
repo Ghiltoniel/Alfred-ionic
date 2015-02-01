@@ -47,27 +47,27 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
 			if(sat != null)
 				arguments.sat = sat;
 
-			websocket.Send('Device_LightCommand', arguments);
+			websocket.send('Device_LightCommand', arguments);
 		},
 
 		getAll: function()
 		{
-			websocket.Send("Device_BroadcastLights");
+			websocket.send("Device_BroadcastLights");
 		},
 
 		allumeTout: function()
 		{
-			websocket.Send("Device_AllumeTout");
+			websocket.send("Device_AllumeTout");
 		},
 
 		eteinsTout: function()
 		{
-			websocket.Send("Device_EteinsTout");
+			websocket.send("Device_EteinsTout");
 		},
 
 		allume: function(piece)
 		{
-			websocket.Send("Device_Allume",
+			websocket.send("Device_Allume",
 			{
 				piece: piece
 			});
@@ -75,7 +75,7 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
 
 		eteins: function(piece)
 		{
-			websocket.Send("Device_Eteins",
+			websocket.send("Device_Eteins",
 			{
 				piece: piece
 			});
@@ -83,7 +83,7 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
 
 		turnUp: function(piece)
 		{
-			websocket.Send("Device_TurnUp",
+			websocket.send("Device_TurnUp",
 			{
 				piece: piece
 			});
@@ -91,7 +91,7 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
 
 		turnDown: function(piece)
 		{
-			websocket.Send("Device_TurnDown",
+			websocket.send("Device_TurnDown",
 			{
 				piece: piece
 			});
@@ -100,11 +100,11 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
 	
 	Service.Sensors = {
 		getAll: function(){
-			websocket.Send("Sensor_BroadcastSensors");
+			websocket.send("Sensor_BroadcastSensors");
 		},
 		
 		getHistory: function(id){
-			websocket.Send("Sensor_BroadcastSensorHistory", {
+			websocket.send("Sensor_BroadcastSensorHistory", {
 				'id': id
 			});
 		}

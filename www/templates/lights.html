@@ -3,15 +3,19 @@
 		<ion-list>
 			<ion-item ng-repeat="light in lights">
 				<div class="row light">
-					<p class="col col-80">{{ light.Name }}</p>
-					<label class="toggle col col-20">
-					   <input type="checkbox" ng-model="light.On" ng-checked="{{ light.On }}" ng-change="toggle()" >
-					   <div class="track">
-						 <div class="handle"></div>
-					   </div>
+					<p class="col col-40" ng-click="showColorPicker()">{{ light.Name }}</p>
+					<label class="toggle col col-30 col-offset-20" ng-show="!light.DimEnabled">
+					    <input type="checkbox" ng-model="light.On" ng-checked="{{ light.On }}" ng-change="toggle()" >
+					    <div class="track">
+							<div class="handle"></div>
+					    </div>
 					</label>
+					<div ng-show="light.DimEnabled" class="range col col-60">
+						<input type="range" ng-model="light.Bri" ng-change="dim()" min="0" max="255">
+					</div>
 				</div>
 			</ion-item>
 		</ion-list>
+		<input id="spectrum"/>
 	</ion-content>
 </ion-view>

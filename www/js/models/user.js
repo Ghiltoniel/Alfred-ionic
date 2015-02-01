@@ -9,7 +9,7 @@ function UserModel(websocket){
 
     var submit = function(login, password){
         me.login = login;
-        me.websocket.Send("User_Login", {
+        me.websocket.send("User_Login", {
             'login': login,
             'password': password
         });
@@ -31,9 +31,14 @@ function UserModel(websocket){
             }
         });
     }
+	
+	var logout = function(){
+		me.websocket.send("User_Logout");
+	};
 
     return {
         submit: submit,
-        subscribe: subscribe
+        subscribe: subscribe,
+		logout: logout
     }
 }

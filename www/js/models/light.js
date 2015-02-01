@@ -9,6 +9,10 @@ function LightModel(alfredClient){
     var toggle = function(id, on){
 		alfredClient.Lights.lightCommand(id, on);
     }
+	
+    var light = function(id, on, bri, hue, sat){
+		alfredClient.Lights.lightCommand(id, on, bri, hue, sat);
+    }
 
     var turnAllOn = function(){
         alfredClient.Lights.allumeTout();
@@ -36,6 +40,7 @@ function LightModel(alfredClient){
     return {
         getAll: getAll,
         toggle: toggle,
+		light: light,
         turnAllOn: turnAllOn,
         turnAllOff: turnAllOff,
         subscribe: subscribe

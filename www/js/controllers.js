@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
 	};
 	
 	$scope.logout = function(){
-		console.log('loging out...');
+		userModel.logout();
 	};
 
 	// Perform the login action when the user submits the login form
@@ -46,6 +46,7 @@ angular.module('starter.controllers', [])
         else if(isOk == 'ko'){
             $scope.error = data;
             $scope.$apply();
+			Auth.setUser(null);
         }
     });
 })

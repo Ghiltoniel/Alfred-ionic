@@ -83,7 +83,7 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
         }
     }
 
-    Service.Send = function(baseCommand, arguments){
+    Service.send = function(baseCommand, arguments){
         if(arguments == null)
             arguments = {};
 		var localUser = localStorage.getItem("user");
@@ -101,7 +101,7 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
         return promise;
     }
     
-    Service.SendRaw = function(message){
+    Service.sendRaw = function(message){
         defer = $q.defer();
         console.log('Sending request', message);
         waitForSocketConnection(ws, function(){

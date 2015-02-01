@@ -7,7 +7,7 @@ function TextToSpeechModel(websocket){
     var me = this;
 
     var run = function(text){
-        me.websocket.Send("Alfred_PlayTempString", {
+        me.websocket.send("Alfred_PlayTempString", {
             'sentence': text
         });
     }

@@ -20,7 +20,7 @@
 .tabbed-slidebox .tsb-icons:after{
 	border-width: 0 0.8em 0.8em 0.8em;
 	border-color: transparent transparent #ccc transparent;
-	margin-left: -9px;
+	margin-left: -6px;
 	bottom: 0px;
 }
 
@@ -57,4 +57,21 @@
 .message img {
 	max-height: 70px !important;
 	max-width: 70px !important;
+}
+
+.range {
+	padding: 0;
+	margin-top: -10px;
+}
+
+.k-colorpicker, #spectrum{
+	display:none;
+}
+
+.k-animation-container{
+	top: 50% !important;
+	left: 50% !important;
+	margin-top: -125px !important;
+	margin-left: -125px !important;
+	background-color: white;
 }

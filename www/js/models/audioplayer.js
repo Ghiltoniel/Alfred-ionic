@@ -12,7 +12,7 @@ function AudioPlayerModel(websocket){
 
     var submit = function(login, password){
         me.login = login;
-        me.websocket.Send("AudioPlayer_Login", {
+        me.websocket.send("AudioPlayer_Login", {
             'login': login,
             'password': password
         });
@@ -27,7 +27,7 @@ function AudioPlayerModel(websocket){
     var register = function () {
         var audioTagSupport = !!(document.createElement('audio').canPlayType);
         if (audioTagSupport) {
-            me.websocket.Send(
+            me.websocket.send(
                 "Player_Register", 
                 {
                     name: 'playerHtml5-' + Math.round(Math.random() * 10000)
@@ -38,29 +38,29 @@ function AudioPlayerModel(websocket){
     }
 
     var unregister = function () {
-        me.websocket.Send("Player_Unregister");
+        me.websocket.send("Player_Unregister");
     }
     
     var ping = function() {
-        me.websocket.SendRaw('ping');
+        me.websocket.sendRaw('ping');
     }
     
     var sendReadyToPlaySignal = function () {
         console.log('sending ready signal');
-        me.websocket.Send("Player_ReadyToPlay");
+        me.websocket.send("Player_ReadyToPlay");
         this.syncStatus = 'ReadyToPlay';
     }
 
     var sendPlayPauseSignal = function () {
-        me.websocket.Send("MediaManager_PlayPause");
+        me.websocket.send("MediaManager_PlayPause");
     }
 
     var sendNextSongSignal = function () {
-        me.websocket.Send("MediaManager_Next");
+        me.websocket.send("MediaManager_Next");
     }
     
     var sendPreviousSongSignal = function () {
-        me.websocket.Send("MediaManager_Previous");
+        me.websocket.send("MediaManager_Previous");
     }
 
     var sendUpdateStatusSignal = function (status, duration, position, volume) {
@@ -86,7 +86,7 @@ function AudioPlayerModel(websocket){
         if (!isNaN(volume))
             args.volume = ('' + volume).replace('.', ',');
 
-        me.websocket.Send(
+        me.websocket.send(
             "MediaManager_UpdateStatus", args
         );
     }

@@ -20,7 +20,7 @@ function ChatModel(websocket){
     }
 
     var send = function(text){
-        me.websocket.Send("Chat_Send", {
+        me.websocket.send("Chat_Send", {
             'text': text
         });
     }
