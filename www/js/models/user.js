@@ -26,7 +26,8 @@ function UserModel(websocket){
                 callback(data.Arguments, 'ok');
             }
             else if(data != null
-                && data.Command == 'AuthenticationFailed'){
+                && (data.Command == 'AuthenticationFailed'
+					|| data.Command == 'Unauthorized')){
                 callback(data.Arguments.error, 'ko');
             }
         });

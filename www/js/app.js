@@ -41,6 +41,16 @@ dashboard
     }
   })
 
+  .state('app.scenarios', {
+    url: "/scenarios",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/scenarios.html",
+        controller: 'scenario'
+      }
+    }
+  })
+
   .state('app.sensors', {
     url: "/sensors",
     views: {

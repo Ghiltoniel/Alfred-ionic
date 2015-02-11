@@ -75,3 +75,7 @@
 	margin-left: -125px !important;
 	background-color: white;
 }
+
+.popover{
+	opacity: 1;
+}
