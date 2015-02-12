@@ -3,11 +3,16 @@
 		<ion-list>
 			<ion-item ng-repeat="scenario in scenarios">
 				<div class="row light">
-					<p class="col col-70">{{ scenario.Name }}</p>
+					<p class="col col-70" ng-click="edit(scenario)">{{ scenario.Name }}</p>
 					<button ng-click="run()" class="button button-balanced col-30 ion-ios-play button-small"></button>
 				</div>
 			</ion-item>
 		</ion-list>
+		<div class="row">
+			<div class="col col-30 col-offset-70">
+				<button class="button button-positive ion-plus-circled button-small" ng-click="new()"></button>
+			</div>
+		</div>
 	</ion-content>
 </ion-view>
 

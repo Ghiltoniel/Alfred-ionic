@@ -45,8 +45,11 @@ angular.module('starter.controllers', [])
         }
         else if(isOk == 'ko'){
             $scope.error = data;
-            $scope.$apply();
+			$scope.login();
 			Auth.setUser(null);
+        }
+        else if(isOk == 'unauthorized'){
+			$scope.login();
         }
     });
 })

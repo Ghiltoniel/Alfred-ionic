@@ -1,0 +1,74 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Login</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="close()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="save()">
+      <div class="list">
+        <label class="item item-input item-select">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="scenario.Name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Type de musique</span>
+          <select class="" ng-model="musicType" ng-change="typeChange()">
+			<option value="Radio">Radio</option>
+			<option value="Playlist">Playlist</option>
+			<option value="Local">Musique locale</option>
+		  </select>
+        </label>
+		<label class="item item-input" ng-show="musicType == 'Radio'">
+          <span class="input-label">Radio</span>
+          <select class="" ng-model="scenario.Radio">
+			<option value="radio.BaseName" ng-repeat="radio in radios">{{ radio.DisplayName }}</option>
+		  </select>
+		</label>
+		<label class="item item-input" ng-show="musicType == 'Playlist'">
+          <span class="input-label">Playlist</span>
+          <select class="" ng-model="scenario.PlaylistId">
+			<option value="playlist.Id" ng-repeat="playlist in playlists">{{ playlist.Name }}</option>
+		  </select>
+		</label>
+		<div ng-show="musicType == 'Local'">
+			<label class="item item-input">
+			  <span class="input-label">Genre</span>
+			  <select class="" ng-model="scenario.Genre" ng-change="changeGenre()">
+				<option value="{{genre}}" ng-repeat="genre in genres">{{ genre }}</option>
+			  </select>
+			</label>			
+			<label class="item item-input">
+			  <span class="input-label">Artist</span>
+			  <select class="" ng-model="scenario.Artist" ng-change="changeArtist()">
+				<option value="{{artist}}" ng-repeat="artist in artists">{{ artist }}</option>
+			  </select>
+			</label>			
+			<label class="item item-input">
+			  <span class="input-label">Album</span>
+			  <select class="" ng-model="scenario.Album">
+				<option value="{{album}}" ng-repeat="album in albums">{{ album }}</option>
+			  </select>
+			</label>
+		</div>
+		<div>
+			<label class="item item-input" ng-repeat="light in lights">
+			  <span class="input-label">{{ light.Name }}</span>
+			  <input type="color" ng-model="light.Color" ng-show="light.ColorEnabled" ng-change="changeColor(light)"/>
+			  <input type="range" ng-model="light.Bri" ng-show="light.DimOnly" min="0" max="255">
+			  <label class="toggle toggle-assertive" ng-show="light.SwitchOnly">
+				  <input type="checkbox" ng-model="light.On">
+				  <div class="track">
+					<div class="handle"></div>
+				  </div>
+			  </label>
+			</label>
+		<div>
+        <label class="item">
+          <button class="button button-block button-balanced" type="submit">Enregistrer</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

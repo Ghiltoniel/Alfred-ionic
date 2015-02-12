@@ -25,10 +25,13 @@ function UserModel(websocket){
                 && data.Arguments.login == me.login) {
                 callback(data.Arguments, 'ok');
             }
-            else if(data != null
-                && (data.Command == 'AuthenticationFailed'
-					|| data.Command == 'Unauthorized')){
+            else if(data != null 
+				&& data.Command == 'AuthenticationFailed'){
                 callback(data.Arguments.error, 'ko');
+            }
+            else if(data != null
+                && data.Command == 'Unauthorized'){
+                callback(null, 'unauthorized');
             }
         });
     }
