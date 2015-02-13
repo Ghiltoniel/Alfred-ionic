@@ -10,7 +10,7 @@
 			</div>
 			<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
 				<ion-slide>
-					<h1>Capteurs</h1>
+					<h2>Capteurs</h2>
 					<div class="card">
 						<div class="item item-divider">
 							Température
@@ -36,7 +36,7 @@
 					</div>
 				</ion-slide>
 				<ion-slide>
-					<h1>Home</h1>					
+					<h2>Bienvenue {{user.login}}</h2>					
 					<div class="card">
 						<div class="item item-divider">
 							People
@@ -50,19 +50,21 @@
 						</div>
 					</div>
 					<form>
-						<h3>Envoyer un message au NAM :</h3>
+						<h4>Envoyer un message au NAM :</h4>
 						<div class="list">
-							<label class="item item-input">
-								<span class="input-label">Text</span>
+						  <div class="item item-input-inset">
+							<label class="item-input-wrapper">
 								<input type="text" ng-model="text">
 							</label>
-							<label class="item">
-								<button class="button button-block button-positive" ng-click="speech()" type="submit">Envoyer au NAM !</button>
-							</label>
+							<button class="button button-small button-positive" ng-click="speech()">
+							  <span class="ion-speakerphone"></span>
+							</button>
+						  </div>
 						</div>
 					</form>
 				</ion-slide>
 				<ion-slide>
+					<h2>Aucun nouveau message</h2>		
 				</ion-slide>
 			</ion-slide-box>
 		</tab-slide-box>

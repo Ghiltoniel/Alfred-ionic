@@ -3,14 +3,38 @@
 .bar{
 	padding: 8px;
 	height: 50px;
+	background-color:rgb(47,51,62);	
 }
 
 .bar .title{
 	top: 4px;
+	color:#fff;
 }
 
 .has-header{
 	top: 50px;
+}
+
+.menu{
+	background-color:rgb(47,51,62);
+}
+
+.menu .bar-header{
+	background: rgb(60,173,155);
+}
+
+.menu .item {
+	background: rgba(0,0,0,0);
+	border: none;
+	color:#fff;
+}
+
+.menu .item .icon {
+	color:rgb(60,173,155);
+}
+
+.menu .item-complex .item-content{
+	background:transparent;
 }
 
 .tabbed-slidebox .slider-slide{
@@ -27,11 +51,15 @@
 .tabbed-slidebox .tsb-icons{
 	margin: 0;
 	padding: 0;
-	background: rgba(0,0,0,0.1);
+	background: rgb(60,173,155);
 }
 
 .tabbed-slidebox .tsb-icons a {
 	font-size: 2em;
+}
+
+.tabbed-slidebox .tsb-icons a::before{
+	color:white;
 }
 
 .tabbed-slidebox .tsb-icons a.active {

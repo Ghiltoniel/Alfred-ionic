@@ -18,24 +18,32 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-balanced">
-      <h1 class="title">Menu</h1>
+      <h1 class="title">
+	    <i class="icon ion-ios-gear-outline"></i>
+		Menu
+	  </h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close href="#/app/sensors">
-          Home
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/sensors">
+			<i class="icon ion-ios-home-outline"></i>
+			Home
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/lights">
-          Lights
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/lights">
+			<i class="icon ion-ios-lightbulb-outline"></i>
+			Lights
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/scenarios">
-          Scenarios
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/scenarios">
+			<i class="icon ion-ios-film-outline"></i>
+			Scenarios
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/chat">
-          Chat
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/chat">
+			<i class="icon ion-ios-chatbubble-outline"></i>
+			Chat
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/torrents">
-          Torrents
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/torrents">
+			<i class="icon ion-ios-cloud-download-outline"></i>
+			Torrents
         </ion-item>
       </ion-list>
     </ion-content>
@@ -47,8 +55,9 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="logout()">
-          Logout
+        <ion-item nav-clear menu-close class="item-icon-right" ng-click="logout()">
+			<i class="icon ion-ios-upload-outline"></i>
+            Logout
         </ion-item>
       </ion-list>
     </ion-content>

@@ -6,9 +6,9 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
     var defer = null;
     var ws;
 
-    function createWebsocket(){
+    function createWebsocket(url){
         // Create our websocket object with the address to the websocket
-        ws = new WebSocket("ws://nam.kicks-ass.org:13100/channel");
+        ws = new WebSocket(url);
 
         ws.onopen = function(){
             console.log("Socket has been opened!");
@@ -46,8 +46,6 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
         };
     }
 
-    createWebsocket();
-
     function sendRequest(request) {
         defer = $q.defer();
         console.log('Sending request', request);
@@ -82,6 +80,12 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
             Service.callbacks[i](data);
         }
     }
+	
+	createWebsocket("ws://nambrothers.tk:13100/channel");
+	
+	Service.connect = function(url){
+		createWebsocket(url);
+	}
 
     Service.send = function(baseCommand, arguments){
         if(arguments == null)

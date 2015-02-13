@@ -28,7 +28,7 @@ function ScenarioModel(websocket, $http){
     }
 
     var save = function(scenario, callback){
-        $http.post('http://api-nam.kicks-ass.org/scenario/save',
+        $http.post('http://nambrothers.tk/scenario/save',
 		JSON.stringify(scenario),
 		{
 			headers: {
