@@ -37,6 +37,7 @@ angular.module('starter.controllers', [])
     userModel.subscribe(function(data, isOk){
         if(isOk == 'ok') {
             $scope.token = data.token;
+			$scope.error = null;
 			Auth.setUser(data);
             $scope.message = 'Login successful !';
 			$scope.modal.hide();
@@ -46,7 +47,6 @@ angular.module('starter.controllers', [])
         else if(isOk == 'ko'){
             $scope.error = data;
 			$scope.login();
-			Auth.setUser(null);
         }
         else if(isOk == 'unauthorized'){
 			$scope.login();

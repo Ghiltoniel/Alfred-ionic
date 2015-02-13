@@ -1,4 +1,4 @@
-dashboard.controller('scenario', function ($scope, $ionicModal, $ionicPopover, $http, scenarioModel) {
+dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopover, $http, scenarioModel) {
 
 	var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Le scénario a été lancé !</h1> </ion-header-bar></ion-popover-view>';
 
@@ -103,6 +103,25 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicPopover, $
 		});
 	};
 	
+	$scope.changeRadio = function(){
+		$http.get('http://api-nam.kicks-ass.org/radios/subradios/'+$scope.scenario.Radio).success(function(data){
+			$scope.subradios = data;
+			for(var i in $scope.radios){
+				if($scope.radios[i].BaseName == $scope.scenario.Radio){					
+					$scope.scenario.RadioUrl = $scope.radios[i].BaseUrl;
+				}
+			}
+		});
+	};
+	
+	$scope.changeSubRadio = function(){
+		for(var i in $scope.subradios){
+			if($scope.subradios[i].Name == $scope.scenario.SubRadio){					
+				$scope.scenario.RadioUrl = $scope.subradios[i].Url;
+			}
+		}
+	};
+	
 	$scope.changeArtist = function(){
 		$http.get('http://api-nam.kicks-ass.org/music/albums?artist='+$scope.scenario.Artist).success(function(data){
 			$scope.albums = data;
@@ -128,9 +147,19 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicPopover, $
     $scope.save = function(){
 		var scenario = $scope.scenario;
 		scenario.Lights = $scope.lights;
-		scenarioModel.save(scenario, function(){
-			$scope.modal.hide();
+		scenarioModel.save(scenario, function(error){
+			if(error.ModelState){
+				$scope.errors = [];
+				for(var e in error.ModelState){
+					if(e != '$type'){
+						$scope.errors.push(error.ModelState[e][0]);
+					}
+				}
+				$ionicScrollDelegate.scrollTop();
+			}
+			if(!error){
+				$scope.modal.hide();
+			}
 		});
 	}
-
 });

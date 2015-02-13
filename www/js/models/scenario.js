@@ -36,7 +36,10 @@ function ScenarioModel(websocket, $http){
 			}
 		}).success(function(data){
 			callback();
-		});
+		}).
+	    error(function(data, status, headers, config) {
+			callback(data);
+	    });
     }
 
     return {

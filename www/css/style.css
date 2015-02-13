@@ -79,3 +79,8 @@
 .popover{
 	opacity: 1;
 }
+
+input[type="color"] {
+	display: inline-block;
+	flex-basis: 100px;
+}
