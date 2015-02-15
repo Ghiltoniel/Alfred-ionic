@@ -2,6 +2,9 @@ dashboard.factory('alfredClient', ['$q', '$rootScope', 'websocket', function($q,
     // We return this object to anything injecting our service
     var Service = {};
     
+	Service.connect = function(url){
+		websocket.connect(url);
+	};
 		
 	Service.subscribe = function(callback){
         websocket.subscribe(function(data){

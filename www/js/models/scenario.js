@@ -1,8 +1,8 @@
-dashboard.factory('scenarioModel', ['websocket', function(websocket) {
-    return new ScenarioModel(websocket);
+dashboard.factory('scenarioModel', ['websocket', '$http', function(websocket, $http) {
+    return new ScenarioModel(websocket, $http);
 }]);
 
-function ScenarioModel(websocket){
+function ScenarioModel(websocket, $http){
     this.websocket = websocket;
     var me = this;
 
@@ -27,9 +27,25 @@ function ScenarioModel(websocket){
         });
     }
 
+    var save = function(scenario, callback){
+        $http.post('http://nambrothers.tk/scenario/save',
+		JSON.stringify(scenario),
+		{
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).success(function(data){
+			callback();
+		}).
+	    error(function(data, status, headers, config) {
+			callback(data);
+	    });
+    }
+
     return {
         getAll: getAll,
         run: run,
-        subscribe: subscribe
+        subscribe: subscribe,
+		save: save
     }
 }

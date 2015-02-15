@@ -1,0 +1,28 @@
+<ion-view view-title="Scenarii">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="scenario in scenarios">
+				<div class="row light">
+					<p class="col col-70" ng-click="edit(scenario)">{{ scenario.Name }}</p>
+					<button ng-click="run()" class="button button-balanced col-30 ion-ios-play button-small"></button>
+				</div>
+			</ion-item>
+		</ion-list>
+		<div class="row">
+			<div class="col col-30 col-offset-70">
+				<button class="button button-positive ion-plus-circled button-small" ng-click="new()"></button>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+</script>

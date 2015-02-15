@@ -92,8 +92,9 @@ dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $co
     sensorModel.getAll();
 });
 
-dashboard.controller('sensorInfos', function ($scope, $ionicLoading, sensorModel, mouvementModel, texttospeechModel) {
+dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, sensorModel, mouvementModel, texttospeechModel) {
 
+	$scope.user = Auth.getUser();
     mouvementModel.subscribe(function(someoneThere){
         $scope.someoneThere = someoneThere;
         $scope.$apply();
