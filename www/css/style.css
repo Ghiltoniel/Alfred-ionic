@@ -75,3 +75,11 @@
 	margin-left: -125px !important;
 	background-color: white;
 }
+
+.message {
+	padding:0;
+}
+
+.message .item {
+	min-height: 90px;
+}
