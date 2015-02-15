@@ -1,5 +1,4 @@
 dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $cookies) {
-
     var areas = [];
     $scope.loading = true;
     sensorModel.subscribe(function(data, type){
@@ -94,6 +93,10 @@ dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $co
 
 dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, sensorModel, mouvementModel, texttospeechModel) {
 
+	$scope.$on('$ionicView.beforeEnter', function(){
+		ionic.trigger('resize', {target: window});
+	});
+	
 	$scope.user = Auth.getUser();
     mouvementModel.subscribe(function(someoneThere){
         $scope.someoneThere = someoneThere;

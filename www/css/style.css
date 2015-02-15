@@ -37,6 +37,10 @@
 	background:transparent;
 }
 
+.menu .item-complex .item-content.activated{
+	background:rgba(0,0,0,0.2);
+}
+
 .tabbed-slidebox .slider-slide{
 	background-color:transparent;
 }
