@@ -148,6 +148,9 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 		var scenario = $scope.scenario;
 		scenario.Lights = $scope.lights;
 		scenarioModel.save(scenario, function(error){
+			if(!error){
+				$scope.modal.hide();
+			}
 			if(error.ModelState){
 				$scope.errors = [];
 				for(var e in error.ModelState){
@@ -156,9 +159,6 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 					}
 				}
 				$ionicScrollDelegate.scrollTop();
-			}
-			if(!error){
-				$scope.modal.hide();
 			}
 		});
 	}

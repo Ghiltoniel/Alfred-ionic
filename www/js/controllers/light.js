@@ -33,8 +33,9 @@ dashboard.controller('light', function ($scope, lightModel) {
 		if(!this.light.ColorEnabled){
 			return;
 		}
+		
+		currentLight = this.light;
 		if(colorPicker == null){
-			currentLight = this.light;
 			colorPicker = $("#spectrum").kendoColorPicker({
 				value: "#ffffff",
 				buttons: false,
