@@ -33,6 +33,10 @@ function UserModel(websocket){
                 && data.Command == 'Unauthorized'){
                 callback(null, 'unauthorized');
             }
+            else if(data != null
+                && data.Command == 'Logout'){
+                callback(null, 'logout');
+            }
         });
     }
 	

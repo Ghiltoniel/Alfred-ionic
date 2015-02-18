@@ -64,7 +64,7 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 			var lightScenario = null;
 			for(var j in scenario.Lights){
 				if(scenario.Lights[j].Key == lightsOrig[i].Key){
-					lightOrig = $scope.lights[j];
+					lightOrig = lightsOrig[i];
 					lightScenario = scenario.Lights[j];
 				}
 			}

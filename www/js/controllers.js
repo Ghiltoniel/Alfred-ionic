@@ -51,5 +51,8 @@ angular.module('starter.controllers', [])
         else if(isOk == 'unauthorized'){
 			$scope.login();
         }
+        else if(isOk == 'logout'){
+			$scope.modal.show();
+        }
     });
 })

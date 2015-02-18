@@ -12,25 +12,25 @@
 				<ion-slide>
 					<h2>Capteurs</h2>
 					<div class="card">
-						<div class="item item-divider">
+						<div class="item item-divider item-balanced">
 							Température
 						</div>
 						<div class="item item-text-wrap">
 							{{ temperature }}<sup style="font-size: 20px">°C</sup>
 						</div>
-						<div class="item item-divider">
+						<div class="item item-divider item-positive">
 							{{ temperatureComment }}
 						</div>
 					</div>
 					
 					<div class="card">
-						<div class="item item-divider">
+						<div class="item item-divider item-balanced">
 							Humidité
 						</div>
 						<div class="item item-text-wrap">
 							{{ humidity }}<sup style="font-size: 20px">%</sup>
 						</div>
-						<div class="item item-divider">
+						<div class="item item-divider item-positive">
 							{{ humidityComment }}
 						</div>
 					</div>
@@ -38,15 +38,15 @@
 				<ion-slide>
 					<h2>Bienvenue {{user.login}}</h2>					
 					<div class="card">
-						<div class="item item-divider">
+						<div class="item item-divider item-balanced">
 							People
 						</div>
 						<div class="item item-text-wrap">				
 							<h3>{{ someoneThere == 'True' ? 'Youpie !' : 'Too bad' }}</h3>
 							{{ someoneThere == 'True' ? 'Someone\'s at the NAM!' : 'The NAM is empty :(' }}
 						</div>
-						<div class="item item-divider">
-							<p>{{ someoneThere == 'True' ? 'Let\'s get started ! :)' : 'Bring friends ASAP !' }}</p>
+						<div class="item item-divider item-positive">
+							{{ someoneThere == 'True' ? 'Let\'s get started ! :)' : 'Bring friends ASAP !' }}
 						</div>
 					</div>
 					<form>

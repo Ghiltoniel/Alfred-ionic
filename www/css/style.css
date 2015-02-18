@@ -124,3 +124,12 @@ input[type="color"] {
 	display: inline-block;
 	flex-basis: 100px;
 }
+
+.item.item-balanced{
+	background-color:rgb(60,173,155);
+}
+
+.item.item-positive{
+	background-color: rgb(47,51,62);
+	border-color:rgb(57,61,72);
+}

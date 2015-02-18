@@ -1,4 +1,4 @@
-dashboard.controller('user', function ($scope, $location, $ionicLoading, userModel, Auth) {
+dashboard.controller('user', function ($scope, $route, $location, $ionicLoading, userModel, Auth) {
 
     userModel.subscribe(function(data, isOk){
         if(isOk == 'ok') {
