@@ -5,7 +5,9 @@ dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel)
 		$ionicLoading.show();
         torrentsModel.search(text, function(data){
             $scope.loading = false;
-            $scope.results = data.MovieList;
+            if (data.status == 'ok') {
+                $scope.results = data.data.movies;
+            }
 			$ionicLoading.hide();
         });		
     }

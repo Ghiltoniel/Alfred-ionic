@@ -13,8 +13,8 @@
 		</form>
 		<div class="list">
 			<div class="item item-button-right" ng-repeat="result in results" >
-				{{ result.MovieTitle }}
-				<button ng-click="download(result.TorrentMagnetUrl)" class="button button-positive">
+				{{ result.title }}
+				<button ng-click="download(result.torrents[0].url)" class="button button-positive">
 					<i class="ion-ios-cloud-download-outline"></i>
 				</button>
 			</div>
