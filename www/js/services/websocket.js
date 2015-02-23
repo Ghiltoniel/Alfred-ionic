@@ -81,7 +81,7 @@ dashboard.factory('websocket', ['$q', '$rootScope', function($q, $rootScope, $co
         }
     }
 	
-	createWebsocket("ws://nambrothers.tk:13100/channel");
+	createWebsocket("ws://api-nam.kicks-ass.org:13100/channel");
 	
 	Service.connect = function(url){
 		createWebsocket(url);

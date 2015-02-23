@@ -21,23 +21,23 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	};
 	
 	var lightsOrig;
-	$http.get('http://nambrothers.tk/device/list').success(function(data){
+	$http.get('http://api-nam.kicks-ass.org/device/list').success(function(data){
 		lightsOrig = data;
 	});
 	
-	$http.get('http://nambrothers.tk/radios').success(function(data){
+	$http.get('http://api-nam.kicks-ass.org/radios').success(function(data){
 		$scope.radios = data;
 	});
 	
-	$http.get('http://nambrothers.tk/playlists').success(function(data){
+	$http.get('http://api-nam.kicks-ass.org/playlists').success(function(data){
 		$scope.playlists = data;
 	});
 	
-	$http.get('http://nambrothers.tk/music/genres').success(function(data){
+	$http.get('http://api-nam.kicks-ass.org/music/genres').success(function(data){
 		$scope.genres = data;
 	});
 	
-	$http.get('http://nambrothers.tk/music/artists').success(function(data){
+	$http.get('http://api-nam.kicks-ass.org/music/artists').success(function(data){
 		$scope.artists = data;
 	});
 	
@@ -98,13 +98,13 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	};
 	
 	$scope.changeGenre = function(){
-		$http.get('http://nambrothers.tk/music/artists?genre='+$scope.scenario.Genre).success(function(data){
+		$http.get('http://api-nam.kicks-ass.org/music/artists?genre='+$scope.scenario.Genre).success(function(data){
 			$scope.artists = data;
 		});
 	};
 	
 	$scope.changeRadio = function(){
-		$http.get('http://nambrothers.tk/radios/subradios/'+$scope.scenario.Radio).success(function(data){
+		$http.get('http://api-nam.kicks-ass.org/radios/subradios/'+$scope.scenario.Radio).success(function(data){
 			$scope.subradios = data;
 			for(var i in $scope.radios){
 				if($scope.radios[i].BaseName == $scope.scenario.Radio){					
@@ -123,7 +123,7 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	};
 	
 	$scope.changeArtist = function(){
-		$http.get('http://nambrothers.tk/music/albums?artist='+$scope.scenario.Artist).success(function(data){
+		$http.get('http://api-nam.kicks-ass.org/music/albums?artist='+$scope.scenario.Artist).success(function(data){
 			$scope.albums = data;
 		});
 	};

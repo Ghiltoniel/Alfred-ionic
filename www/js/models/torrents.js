@@ -12,7 +12,7 @@ function TorrentsModel(websocket, $http){
     }
     
     var download = function(url, callback){
-        $http.get('http://nambrothers.tk/torrent/download?magnet=' + encodeURI(url)).success(callback);
+        $http.get('http://api-nam.kicks-ass.org/torrent/download?magnet=' + encodeURI(url)).success(callback);
     }
 
     return {
