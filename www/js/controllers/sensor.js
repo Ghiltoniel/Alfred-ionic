@@ -119,6 +119,7 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
             $scope.loading = false;
             $scope.$apply();
 
+			ionic.trigger('resize', {target: window});
             var history = JSON.parse(data.history);
             var lastDate;
             for(var i in history) {
