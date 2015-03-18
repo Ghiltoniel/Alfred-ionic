@@ -1,4 +1,5 @@
 dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $cookies) {
+
     var areas = [];
     $scope.loading = true;
     sensorModel.subscribe(function(data, type){
@@ -93,6 +94,7 @@ dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $co
 
 dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, sensorModel, mouvementModel, texttospeechModel) {
 
+    $scope.loading = true;
 	$scope.$on('$ionicView.beforeEnter', function(){
 		ionic.trigger('resize', {target: window});
 	});
@@ -141,20 +143,14 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
                 $scope.humidityComment = 'Everything\'s normal !';
             }
             $scope.$apply();
-			$ionicLoading.hide();
         }
     });
 	
     sensorModel.getAll();
-	$ionicLoading.show({
-		template: 'Loading...'
-	});
 		
 	$scope.$on('authenticated', function(event, args) {
 		sensorModel.getAll();
-		$ionicLoading.show({
-			template: 'Loading...'
-		});
+		$scope.loading = true;
 	});
 	
 	$scope.speech = function(){

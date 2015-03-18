@@ -133,3 +133,12 @@ input[type="color"] {
 	background-color: rgb(47,51,62);
 	border-color:rgb(57,61,72);
 }
+
+.spinner-centered{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:-14px;
+	display: block;
+	width: 28px;
+}

@@ -43,6 +43,7 @@ angular.module('starter.controllers', [])
 			$scope.modal.hide();
             $scope.$apply();
 			$rootScope.$broadcast("authenticated");
+			$ionicLoading.hide();
         }
         else if(isOk == 'ko'){
             $scope.error = data;
