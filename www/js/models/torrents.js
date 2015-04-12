@@ -8,7 +8,7 @@ function TorrentsModel(websocket, $http){
     var me = this;
     
     var search = function(text, callback){
-        $http.get('https://yts.re/api/v2/list_movies.json?query_term=' + text).success(callback);
+        $http.get('https://yts.to/api/v2/list_movies.json?query_term=' + text).success(callback);
     }
     
     var download = function(url, callback){
