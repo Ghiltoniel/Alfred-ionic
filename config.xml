@@ -27,7 +27,6 @@
   <preference name="android-installLocation" value="auto"/>
   <preference name="SplashScreen" value="splash"/>
   <preference name="SplashScreenDelay" value="1500"/>
-  <preference name="LoadingDialog" value="Loading ..."/>
   <gap:plugin name="org.apache.cordova.battery-status"/>
   <gap:plugin name="org.apache.cordova.camera"/>
   <gap:plugin name="org.apache.cordova.media-capture"/>
