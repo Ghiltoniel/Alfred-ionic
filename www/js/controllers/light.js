@@ -1,12 +1,15 @@
 dashboard.controller('light', function ($scope, lightModel) {
 	var colorPicker;
 	var currentLight;
+    $scope.loading = true;
+    $scope.allLightsOn = false;
 	
     lightModel.subscribe(function(lights){
 		for(var l in lights){
 			lights[l].Bri = lights[l].Bri || 0;
 		}
         $scope.lights = lights;
+    	$scope.loading = false;
         $scope.$apply();
     });
 
@@ -14,6 +17,16 @@ dashboard.controller('light', function ($scope, lightModel) {
 
     $scope.toggle = function(){
         lightModel.toggle(this.light.Key, this.light.On);
+    }
+
+    $scope.toggleAll = function(){
+    	alert($scope.allLightsOn);
+    	if($scope.allLightsOn){
+    		lightModel.turnAllOff();
+    	}
+    	else {
+    		lightModel.turnAllOn();
+    	}
     }
 	
     $scope.dim = function(){

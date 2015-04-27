@@ -1,6 +1,18 @@
 <ion-view view-title="Lights">
 	<ion-content>
+		<ion-spinner ng-show="loading" class="spinner-centered"></ion-spinner>
 		<ion-list>
+			<ion-item>
+				<div class="row light">
+					<p class="col col-40">Toutes</p>
+					<label class="toggle col col-30 col-offset-20">
+					    <input type="checkbox" ng-model="allLightsOn" ng-checked="{{ allLightsOn }}" ng-change="toggleAll()" >
+					    <div class="track">
+							<div class="handle"></div>
+					    </div>
+					</label>
+				</div>
+			</ion-item>
 			<ion-item ng-repeat="light in lights">
 				<div class="row light">
 					<p class="col col-40" ng-click="showColorPicker()">{{ light.Name }}</p>

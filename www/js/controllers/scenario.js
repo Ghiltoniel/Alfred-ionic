@@ -1,5 +1,6 @@
 dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopover, $http, scenarioModel) {
 
+    $scope.loading = true;
 	var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Le scénario a été lancé !</h1> </ion-header-bar></ion-popover-view>';
 
 	$scope.popover = $ionicPopover.fromTemplate(template, {
@@ -134,6 +135,7 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	
     scenarioModel.subscribe(function(scenarios){
         $scope.scenarios = scenarios;
+    	$scope.loading = false;
         $scope.$apply();
     });
 
