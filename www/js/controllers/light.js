@@ -20,7 +20,6 @@ dashboard.controller('light', function ($scope, lightModel) {
     }
 
     $scope.toggleAll = function(){
-    	alert($scope.allLightsOn);
     	if($scope.allLightsOn){
     		lightModel.turnAllOff();
     	}
