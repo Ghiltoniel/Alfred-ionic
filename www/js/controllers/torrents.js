@@ -12,9 +12,9 @@ dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel)
         });		
     }
     
-    $scope.download = function(url){
+    $scope.download = function(torrent){
 		$ionicLoading.show();
-        torrentsModel.download(url, function(result){
+        torrentsModel.download(torrent.torrents[0].hash, torrent.title, function(result){
             $scope.loading = false;
             $scope.$apply();
             $scope.results = [];

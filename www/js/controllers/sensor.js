@@ -107,6 +107,7 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
 	
     sensorModel.subscribe(function(data, type){
 		if(type == 'sensors') {
+		    loaded();
             var sensors = data;
             $scope.sensors = sensors;
             $scope.sensor = sensors[0];
@@ -116,10 +117,7 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
             $scope.$apply();
         }
         if(type == 'history'){
-            $scope.loading = false;
-            $scope.$apply();
-
-			ionic.trigger('resize', {target: window});
+		    loaded();
             var history = JSON.parse(data.history);
             var lastDate;
             for(var i in history) {
@@ -156,5 +154,12 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
 	
 	$scope.speech = function(){
         texttospeechModel.run($scope.text);
+    }
+    
+    function loaded(){
+        $scope.loading = false;
+        $scope.$apply();
+
+		ionic.trigger('resize', {target: window});
     }
 });

@@ -142,3 +142,17 @@ input[type="color"] {
 	display: block;
 	width: 28px;
 }
+
+#chat-footer .button{
+	width:15%;
+}
+
+#newMessage {
+	width:85%;
+	padding-left:2%;
+}
+
+#chat-footer .item-input-wrapper{
+	padding:0;
+	margin: 0;
+}
