@@ -25,8 +25,6 @@
   <preference name="disable-cursor" value="false"/>
   <preference name="android-minSdkVersion" value="7"/>
   <preference name="android-installLocation" value="auto"/>
-  <preference name="SplashScreen" value="splash"/>
-  <preference name="SplashScreenDelay" value="1500"/>
   <gap:plugin name="org.apache.cordova.battery-status"/>
   <gap:plugin name="org.apache.cordova.camera"/>
   <gap:plugin name="org.apache.cordova.media-capture"/>
@@ -46,23 +44,5 @@
   <gap:plugin name="org.apache.cordova.splashscreen"/>
   <gap:plugin name="org.apache.cordova.vibration"/>
   <icon src="icon.png"/>
-  <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="resources/android/splash/ldpi.png"/>
-  <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="resources/android/splash/mdpi.png"/>
-  <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="resources/android/splash/hdpi.png"/>
-  <gap:splash gap:platform="android" gap:qualifier="port-xhdpi" src="resources/android/splash/xhdpi.png"/>
-  <gap:splash gap:platform="blackberry" src="www/res/screen/blackberry/screen-225.png"/>
-  <gap:splash gap:platform="ios" height="480" src="www/res/screen/ios/screen-iphone-portrait.png" width="320"/>
-  <gap:splash gap:platform="ios" height="960" src="www/res/screen/ios/screen-iphone-portrait-2x.png" width="640"/>
-  <gap:splash gap:platform="ios" height="1136" src="www/res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640"/>
-  <gap:splash gap:platform="ios" height="1024" src="www/res/screen/ios/screen-ipad-portrait.png" width="768"/>
-  <gap:splash gap:platform="ios" height="768" src="www/res/screen/ios/screen-ipad-landscape.png" width="1024"/>
-  <gap:splash gap:platform="winphone" src="www/res/screen/windows-phone/screen-portrait.jpg"/>
-  
-  <icon src="ldpi.png" gap:platform="android" gap:qualifier="ldpi" />
-  <icon src="mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
-  <icon src="hdpi.png" gap:platform="android" gap:qualifier="hdpi" />
-  <icon src="xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
-  <icon src="xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi" />
-  
   <access origin="*"/>
 </widget>
