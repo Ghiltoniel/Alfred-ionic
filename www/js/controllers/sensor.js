@@ -92,34 +92,34 @@ dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $co
     sensorModel.getAll();
 });
 
-dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, sensorModel, mouvementModel, texttospeechModel) {
+dashboard.controller('sensorInfos', function ($scope, $ionicLoading, alfredAuth, alfredClient, sensorModel) {
 
     $scope.loading = true;
 	$scope.$on('$ionicView.beforeEnter', function(){
 		ionic.trigger('resize', {target: window});
 	});
 	
-	$scope.user = Auth.getUser();
-    mouvementModel.subscribe(function(someoneThere){
-        $scope.someoneThere = someoneThere;
-        $scope.$apply();
-    });
-	
-    sensorModel.subscribe(function(data, type){
-		if(type == 'sensors') {
-		    loaded();
-            var sensors = data;
-            $scope.sensors = sensors;
-            $scope.sensor = sensors[0];
-
-            sensorModel.getHistory(sensors[0].Id);
-            sensorModel.getHistory(sensors[1].Id);
+	$scope.user = alfredAuth.getUser();
+	alfredClient.subscribe(function(data){
+        if (data != null
+            && data.Arguments != null
+            && typeof(data.Arguments.someoneThere) != 'undefined') {
+            $scope.someoneThere = data.Arguments.someoneThere;
             $scope.$apply();
         }
-        if(type == 'history'){
-		    loaded();
-            var history = JSON.parse(data.history);
+    });
+	
+	alfredClient.Sensors.getAll().then(function(sensors){
+        loaded();
+        $scope.sensors = sensors;
+        $scope.sensor = sensors[0];
+
+        alfredClient.Sensors.getHistory(sensors[0].Id);
+        alfredClient.Sensors.getHistory(sensors[1].Id).then(function(sensor, type){
+            loaded();
             var lastDate;
+            var lastValue;
+            var history = JSON.parse(sensor.history);
             for(var i in history) {
                 var newDate = new Date(i);
                 if(!lastDate || lastDate < newDate){
@@ -128,7 +128,7 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
                 }
             }
 
-            if(data.type == 'Temperature'){
+            if(sensor.type == 'Temperature'){
                 $scope.temperature = lastValue;
                 if(lastValue > 20){
                     $scope.temperatureComment = "It's quite nice out here !";
@@ -137,15 +137,13 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
                     $scope.temperatureComment = "It's getting freezy out here !";
                 }
             }
-            if(data.type == 'Humidity'){
+            if(sensor.type == 'Humidity'){
                 $scope.humidity = lastValue;
                 $scope.humidityComment = 'Everything\'s normal !';
             }
             $scope.$apply();
-        }
+        });
     });
-	
-    sensorModel.getAll();
 		
 	$scope.$on('authenticated', function(event, args) {
 		sensorModel.getAll();
@@ -153,7 +151,7 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, Auth, senso
 	});
 	
 	$scope.speech = function(){
-        texttospeechModel.run($scope.text);
+        alfredClient.TextToSpeech.speak($scope.text);
     }
     
     function loaded(){

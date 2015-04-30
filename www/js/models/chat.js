@@ -1,13 +1,11 @@
-dashboard.factory('chatModel', ['websocket', function(websocket) {
-    return new ChatModel(websocket);
-}]);
+dashboard.factory('chatModel', function(alfredClient) {
+    return new ChatModel(alfredClient);
+});
 
-function ChatModel(websocket){
-    this.websocket = websocket;
-    var me = this;
-
+function ChatModel(alfredClient){
+    
     var subscribe = function(callback){
-        me.websocket.subscribe(function(data){
+        alfredClient.subscribe(function(data){
             if (data != null
                 && data.Arguments != null
                 && typeof(data.Arguments.message) != 'undefined') {
@@ -20,9 +18,7 @@ function ChatModel(websocket){
     }
 
     var send = function(text){
-        me.websocket.send("Chat_Send", {
-            'text': text
-        });
+        alfredClient.Chat.send(text);
     }
 
     return {

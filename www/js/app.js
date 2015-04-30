@@ -4,10 +4,16 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-dashboard = angular.module('starter', ['ionic', 'tabSlideBox', 'starter.controllers']);
+dashboard = angular.module('starter', ['ionic', 'tabSlideBox', 'starter.controllers', 'alfred']);
 
 dashboard
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, alfredClient) {
+  alfredClient.init({
+    name: 'Alfred-angular-client',
+    host: 'nam.kicks-ass.org',
+    port: 13100
+  });
+    
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

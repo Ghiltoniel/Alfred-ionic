@@ -1,16 +1,13 @@
 <ion-view view-title="Torrents">
-	<ion-content>
-		<form ng-submit="search(text)" class="col-sm-12">
-			<div class="list">
-				<div class="item item-divider">
-					Recherche
-				</div>
-				<label class="item item-input">
-					<input ng-model="text" type="text">
-					<button class="button button-clear button-medium"><i class="ion-search"></i></button></div>   
-				</label>       
-			</div>
-		</form>
+	<form ng-submit="search(text)" class="col-sm-12">
+		<div class="bar bar-subheader item-input-inset">
+			<label class="item-input-wrapper">
+		      <i class="icon ion-ios-search placeholder-icon"></i>
+		      <input type="search" placeholder="Search" id="torrent-search-input" ng-model="text"/>
+		    </label>
+		</div>
+	</form>
+	<ion-content scroll="true">
 		<div class="list">
 			<div class="item item-button-right" ng-repeat="result in results" >
 				{{ result.title }}

@@ -7,6 +7,9 @@ dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel)
             $scope.loading = false;
             if (data.status == 'ok') {
                 $scope.results = data.data.movies;
+                if(data.data.movies.length){
+                    document.getElementById('torrent-search-input').blur();
+                }
             }
 			$ionicLoading.hide();
         });		

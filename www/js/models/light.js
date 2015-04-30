@@ -3,8 +3,6 @@ dashboard.factory('lightModel', ['alfredClient', function(alfredClient) {
 }]);
 
 function LightModel(alfredClient){
-    this.alfredClient = alfredClient;
-    var me = this;
 
     var toggle = function(id, on){
 		alfredClient.Lights.lightCommand(id, on);

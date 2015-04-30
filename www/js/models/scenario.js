@@ -1,51 +1,23 @@
-dashboard.factory('scenarioModel', ['websocket', '$http', function(websocket, $http) {
-    return new ScenarioModel(websocket, $http);
-}]);
+dashboard.factory('scenarioModel', function(alfredClient) {
+    return new ScenarioModel(alfredClient);
+});
 
-function ScenarioModel(websocket, $http){
-    this.websocket = websocket;
-    var me = this;
-
+function ScenarioModel(alfredClient){
     var run = function(name){
-        me.websocket.send("Scenario_LaunchScenario", {
-            'mode': name
-        });
+        alfredClient.Scenario.run(name);
     }
 
     var getAll = function(){
-        me.websocket.send("Scenario_BroadcastScenarios");
+        return alfredClient.Scenario.getAll();
     }
 
-    var subscribe = function(callback){
-        me.websocket.subscribe(function(data){
-            if (data != null
-                && data.Arguments != null
-                && typeof(data.Arguments.scenarios) != 'undefined') {
-                var scenarios = JSON.parse(data.Arguments.scenarios);
-                callback(scenarios);
-            }
-        });
-    }
-
-    var save = function(scenario, callback){
-        $http.post('http://api-nam.kicks-ass.org/scenario/save',
-		JSON.stringify(scenario),
-		{
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		}).success(function(data){
-			callback();
-		}).
-	    error(function(data, status, headers, config) {
-			callback(data);
-	    });
+    var save = function(scenario){
+        return alfredClient.Scenario.save(scenario);
     }
 
     return {
         getAll: getAll,
         run: run,
-        subscribe: subscribe,
 		save: save
     }
 }

@@ -1,4 +1,4 @@
-dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopover, $http, scenarioModel) {
+dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDelegate, $ionicPopover, $http, scenarioModel, alfredClient) {
 
     $scope.loading = true;
 	var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Le scénario a été lancé !</h1> </ion-header-bar></ion-popover-view>';
@@ -22,23 +22,23 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	};
 	
 	var lightsOrig;
-	$http.get('http://api-nam.kicks-ass.org/device/list').success(function(data){
-		lightsOrig = data;
+	alfredClient.Lights.getAll().then(function(lights){
+		lightsOrig = lights;	
 	});
 	
-	$http.get('http://api-nam.kicks-ass.org/radios').success(function(data){
+	$http.get(alfredClient.parameters.url + '/radios').success(function(data){
 		$scope.radios = data;
 	});
 	
-	$http.get('http://api-nam.kicks-ass.org/playlists').success(function(data){
+	$http.get(alfredClient.parameters.url + '/playlists').success(function(data){
 		$scope.playlists = data;
 	});
 	
-	$http.get('http://api-nam.kicks-ass.org/music/genres').success(function(data){
+	$http.get(alfredClient.parameters.url + '/music/genres').success(function(data){
 		$scope.genres = data;
 	});
 	
-	$http.get('http://api-nam.kicks-ass.org/music/artists').success(function(data){
+	$http.get(alfredClient.parameters.url + '/music/artists').success(function(data){
 		$scope.artists = data;
 	});
 	
@@ -99,13 +99,13 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	};
 	
 	$scope.changeGenre = function(){
-		$http.get('http://api-nam.kicks-ass.org/music/artists?genre='+$scope.scenario.Genre).success(function(data){
+		$http.get(alfredClient.parameters.url + '/music/artists?genre='+$scope.scenario.Genre).success(function(data){
 			$scope.artists = data;
 		});
 	};
 	
 	$scope.changeRadio = function(){
-		$http.get('http://api-nam.kicks-ass.org/radios/subradios/'+$scope.scenario.Radio).success(function(data){
+		$http.get(alfredClient.parameters.url + '/radios/subradios/'+$scope.scenario.Radio).success(function(data){
 			$scope.subradios = data;
 			for(var i in $scope.radios){
 				if($scope.radios[i].BaseName == $scope.scenario.Radio){					
@@ -124,7 +124,7 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	};
 	
 	$scope.changeArtist = function(){
-		$http.get('http://api-nam.kicks-ass.org/music/albums?artist='+$scope.scenario.Artist).success(function(data){
+		$http.get(alfredClient.parameters.url + '/music/albums?artist='+$scope.scenario.Artist).success(function(data){
 			$scope.albums = data;
 		});
 	};
@@ -132,14 +132,12 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
 	$scope.close = function(){
 		$scope.modal.hide();
 	};
-	
-    scenarioModel.subscribe(function(scenarios){
+
+    scenarioModel.getAll().then(function(scenarios){
         $scope.scenarios = scenarios;
     	$scope.loading = false;
         $scope.$apply();
     });
-
-    scenarioModel.getAll();
 
     $scope.run = function(){
         scenarioModel.run(this.scenario.Name);
@@ -149,7 +147,10 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
     $scope.save = function(){
 		var scenario = $scope.scenario;
 		scenario.Lights = $scope.lights;
-		scenarioModel.save(scenario, function(error){
+		scenarioModel.save(scenario).then(
+		function(){
+		}, 
+		function(error){
 			if(!error){
 				$scope.modal.hide();
 			}

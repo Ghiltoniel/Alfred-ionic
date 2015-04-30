@@ -1,13 +1,15 @@
-dashboard.factory('sensorModel', ['alfredClient', function(alfredClient) {
+dashboard.factory('sensorModel', function(alfredClient) {
     return new SensorModel(alfredClient);
-}]);
+});
 
 function SensorModel(alfredClient){
     this.alfredClient = alfredClient;
     var me = this;
 
     var getAll = function(){
-        me.alfredClient.Sensors.getAll();
+        me.alfredClient.Sensors.getAll().then(function(sensors){
+            
+        });
     }
 
     var getHistory = function(id){
