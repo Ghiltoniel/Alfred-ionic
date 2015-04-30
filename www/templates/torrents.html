@@ -8,6 +8,7 @@
 		</div>
 	</form>
 	<ion-content scroll="true">
+		<h4 ng-show="results && results.length == 0">Aucun résultats</h4>
 		<div class="list">
 			<div class="item item-button-right" ng-repeat="result in results" >
 				{{ result.title }}

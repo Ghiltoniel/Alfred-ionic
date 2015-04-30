@@ -17,9 +17,12 @@ dashboard.controller('chat', function ($scope, $ionicScrollDelegate, chatModel) 
         if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
             localStorage.setItem(CHAT_ID, JSON.stringify(chatMessages));
 			$ionicScrollDelegate.scrollBottom();
-			document.getElementById('newMessage').focus();
 		}
     }, true);
+    
+    $scope.$on('$ionicView.enter', function(){
+        document.getElementById('newMessage').focus(); 
+    });
 
     $scope.newMessage = {
         text: ''

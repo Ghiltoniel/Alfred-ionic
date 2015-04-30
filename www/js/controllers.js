@@ -13,6 +13,13 @@ angular.module('starter.controllers', [])
 			$scope.login();
 		}
 	});
+	
+	alfredClient.subscribe(function(data){
+		if(data != null
+	        && data.Command == 'Unauthorized'){
+			$scope.login();
+	    }
+    });
 
 	// Triggered in the login modal to close it
 	$scope.closeLogin = function() {
@@ -28,6 +35,8 @@ angular.module('starter.controllers', [])
 	$scope.logout = function(){
 		alfredClient.User.logout().then(function(result){
 			$scope.modal.show();
+		}, function(error){
+			alert(error);	
 		});
 	};
 

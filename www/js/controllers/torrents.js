@@ -20,7 +20,7 @@ dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel)
         torrentsModel.download(torrent.torrents[0].hash, torrent.title, function(result){
             $scope.loading = false;
             $scope.$apply();
-            $scope.results = [];
+            delete $scope.results;
 			$ionicLoading.hide();
         });
     }
