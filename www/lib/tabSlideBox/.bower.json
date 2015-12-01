@@ -1,0 +1,14 @@
+{
+  "name": "tabSlideBox",
+  "_cacheHeaders": {
+    "ETag": "\"ed174115e98aedd7ba396ccbdb25bd4c51a76094\"",
+    "Content-Length": "5471",
+    "Content-Type": "text/plain; charset=utf-8"
+  },
+  "_release": "e-tag:ed174115e",
+  "main": "index.js",
+  "_source": "https://raw.githubusercontent.com/saravmajestic/ionic/master/tabbedSlideBox/tabSlideBox.js",
+  "_target": "*",
+  "_originalSource": "https://raw.githubusercontent.com/saravmajestic/ionic/master/tabbedSlideBox/tabSlideBox.js",
+  "_direct": true
+}
