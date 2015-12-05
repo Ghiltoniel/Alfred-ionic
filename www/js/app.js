@@ -8,12 +8,6 @@ dashboard = angular.module('starter', ['ionic', 'tabSlideBox', 'starter.controll
 
 dashboard
 .run(function($ionicPlatform, alfredClient) {
-  alfredClient.init({
-    name: 'Alfred-angular-client',
-    host: 'nam.kicks-ass.org',
-    port: 13100
-  });
-    
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)

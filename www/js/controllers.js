@@ -1,16 +1,29 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $ionicModal, $timeout, $location, $state, alfredClient, alfredAuth) {
+.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $ionicModal, $timeout, $location, $state, alfredClient, alfredAuth, alfredParams) {
 	// Form data for the login modal
 	
 	$scope.loginData = {};
+	$scope.parameters = alfredParams.getParams();
+		
 	// Create the login modal that we will use later
 	$ionicModal.fromTemplateUrl('templates/login.html', {
 		scope: $scope
 	}).then(function(modal) {
-		$scope.modal = modal;
+		$scope.loginModal= modal;
 		if(alfredAuth.getUser() == null){
 			$scope.login();
+		}
+	});
+	
+	
+	// Create the login modal that we will use later
+	$ionicModal.fromTemplateUrl('templates/parameters.html', {
+		scope: $scope
+	}).then(function(modal) {
+		$scope.paramsModal = modal;
+		if($scope.parameters == null){
+			$scope.params();
 		}
 	});
 	
@@ -23,18 +36,24 @@ angular.module('starter.controllers', [])
 
 	// Triggered in the login modal to close it
 	$scope.closeLogin = function() {
-		$scope.modal.hide();
+		$scope.loginModal.hide();
 	};
 
 	// Open the login modal
 	$scope.login = function() {
 		$ionicLoading.hide();
-		$scope.modal.show();
+		$scope.loginModal.show();
+	};
+
+	// Open the login modal
+	$scope.params = function() {
+		$ionicLoading.hide();
+		$scope.paramsModal.show();
 	};
 	
 	$scope.logout = function(){
 		alfredClient.User.logout().then(function(result){
-			$scope.modal.show();
+			$scope.loginModal.show();
 		}, function(error){
 			alert(error);	
 		});
@@ -45,7 +64,7 @@ angular.module('starter.controllers', [])
 		alfredClient.User.login($scope.loginData.username, $scope.loginData.password).then(function(result) {
 			$scope.error = null;
             $scope.message = 'Login successful !';
-			$scope.modal.hide();
+			$scope.loginModal.hide();
             $scope.$apply();
 			$rootScope.$broadcast("authenticated");
 			$ionicLoading.hide();
@@ -53,5 +72,32 @@ angular.module('starter.controllers', [])
 			$scope.error = data.error;
 			$scope.login();
 		});
+	};	
+	
+
+	// Perform the login action when the user submits the login form
+	$scope.setParameters = function() {
+		try{
+			alfredClient.init({
+				name: 'Alfred-ionic-client',
+				host: $scope.parameters.host,
+				portWebSocket: $scope.parameters.portWebSocket,
+				portHttp: $scope.parameters.portHttp,
+				onConnect: function(){					
+					$rootScope.$broadcast("connected");
+				}
+			});
+			if($scope.paramsModal){
+				$scope.paramsModal.hide();
+			}
+			$scope.error = '';
+		}
+		catch(e){			
+			$scope.error = e.message;
+		}
 	};
+	
+	if($scope.parameters != null){
+		$scope.setParameters();
+	}
 })

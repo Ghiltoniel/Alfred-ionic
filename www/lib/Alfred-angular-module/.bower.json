@@ -1,11 +1,29 @@
 {
-  "name": "Alfred-angular-module",
+  "name": "alfred-angular",
   "homepage": "https://github.com/Ghiltoniel/Alfred-angular-module",
-  "_release": "7639f8ff8b",
+  "authors": [
+    "Guillaume Jacquart <guillaume.jacquart@live.fr>"
+  ],
+  "description": "Alfred angular module for Alfred Server",
+  "main": "alfred.js",
+  "moduleType": [],
+  "keywords": [
+    "angular",
+    "alfred"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "72be2832b6",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "7639f8ff8ba4da102fab5c34ea11db8125a8eea7"
+    "commit": "72be2832b606a18b19d1e02da408918f2f161a2a"
   },
   "_source": "https://github.com/Ghiltoniel/Alfred-angular-module.git",
   "_target": "*",

@@ -2,7 +2,7 @@ var alfred = angular.module('alfred', []);
 
 alfred.service('alfredAuth', function() {
     var user = window.user;
-	var localUser = localStorage.getItem("user");
+	var localUser = localStorage.getItem("alfred-user");
 	if(typeof(user) == 'undefined' && typeof(localUser) != 'undefined'){
 		user = JSON.parse(localUser);
 	}
@@ -13,10 +13,32 @@ alfred.service('alfredAuth', function() {
         },
         setUser: function(newUser) {
             user = newUser;
-			localStorage.setItem('user', JSON.stringify(user));
+			localStorage.setItem('alfred-user', JSON.stringify(user));
         },
         isConnected: function() {
             return !!user;
+        }
+    };
+});
+
+
+alfred.service('alfredParams', function() {
+    var params = window.params;
+	var localParams= localStorage.getItem("alfred-params");
+	if(typeof(params) == 'undefined' && typeof(localParams) != 'undefined'){
+		params = JSON.parse(localParams);
+	}
+	
+    return {
+        getParams: function() {
+            return params;
+        },
+        setParams: function(newParams) {
+            params = newParams;
+			localStorage.setItem('alfred-params', JSON.stringify(params));
+        },
+        isConfigured: function() {
+            return !!params;
         }
     };
 });
@@ -32,7 +54,12 @@ alfred.factory('alfredWebsocket', function($q) {
 
     function createWebsocket(url){
         // Create our alfredWebsocket object with the address to the alfredWebsocket
-        ws = new WebSocket(url);
+        try{
+			ws = new WebSocket(url);
+		}catch(e){
+			throw e;
+			return;
+		}
         ws.onopen = function(){
             for(var i=0;i<Service.callbacksOpen.length;i++){
                 Service.callbacksOpen[i]();
@@ -106,13 +133,13 @@ alfred.factory('alfredWebsocket', function($q) {
     }
 	
 	Service.init = function(param){
-	    createWebsocket('ws://' + param.host + ':' + param.port + '/channel');
+	    createWebsocket('ws://' + param.host + ':' + param.portWebSocket + '/channel');
 	}
 
     Service.send = function(baseCommand, arguments){
         if(arguments == null)
             arguments = {};
-		var localUser = localStorage.getItem("user");
+		var localUser = localStorage.getItem("alfred-user");
         if (localUser != null) {
             var user = JSON.parse(localUser);
             arguments.token = user.token;
@@ -163,7 +190,7 @@ alfred.factory('alfredWebsocket', function($q) {
 });
 
 
-alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, $q, $http) {
+alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParams, $q, $http) {
     
     var parameters;
     var Service = {};    
@@ -172,7 +199,8 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, $q, $http) 
         parameters = param || {};
         parameters.name = parameters.name || 'Alfred-angular-client';
         parameters.host = parameters.host || 'localhost';
-        parameters.port = parameters.port || 13100;
+        parameters.portWebSocket = parameters.portWebSocket || 13100;
+        parameters.portHttp = parameters.portHttp || 80;
         parameters.onConnect = parameters.onConnect || null;
         parameters.onDisconnect = parameters.onDisconnect || null;  
         
@@ -181,7 +209,9 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, $q, $http) 
         alfredWebsocket.init(parameters);
     
         Service.parameters = parameters;
-        Service.parameters.url = 'http://' + parameters.host;
+        Service.parameters.url = 'http://' + parameters.host + ':' + parameters.portHttp;
+		
+		alfredParams.setParams(parameters);
     };
     
     Service.subscribe = function (callback) {

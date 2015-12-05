@@ -88,11 +88,9 @@ dashboard.controller('sensor', function ($scope, $ionicLoading, sensorModel, $co
         $scope.loading = true;
         sensorModel.getHistory(this.s.Id);
     }
-
-    sensorModel.getAll();
 });
 
-dashboard.controller('sensorInfos', function ($scope, $ionicLoading, alfredAuth, alfredClient, sensorModel) {
+dashboard.controller('sensorInfos', function ($rootScope, $scope, $ionicLoading, alfredAuth, alfredClient, sensorModel) {
 
     $scope.loading = true;
 	$scope.$on('$ionicView.beforeEnter', function(){
@@ -147,7 +145,12 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, alfredAuth,
         });
 	};
 		
-	$scope.$on('authenticated', function(event, args) {
+	$rootScope.$on('authenticated', function(event, args) {
+		loadSensors();
+		$scope.loading = true;
+	});
+		
+	$rootScope.$on('connected', function(event, args) {
 		loadSensors();
 		$scope.loading = true;
 	});
@@ -162,6 +165,4 @@ dashboard.controller('sensorInfos', function ($scope, $ionicLoading, alfredAuth,
 
 		ionic.trigger('resize', {target: window});
     }
-    
-    loadSensors();
 });
