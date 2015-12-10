@@ -4,7 +4,8 @@ angular.module('starter.controllers', [])
 	// Form data for the login modal
 	
 	$scope.loginData = {};
-	$scope.parameters = alfredParams.getParams();
+	$scope.parameters = {};
+	var paramsCache = alfredParams.getParams() ;
 		
 	// Create the login modal that we will use later
 	$ionicModal.fromTemplateUrl('templates/login.html', {
@@ -22,7 +23,7 @@ angular.module('starter.controllers', [])
 		scope: $scope
 	}).then(function(modal) {
 		$scope.paramsModal = modal;
-		if($scope.parameters == null){
+		if(paramsCache == null){
 			$scope.params();
 		}
 	});
@@ -97,7 +98,8 @@ angular.module('starter.controllers', [])
 		}
 	};
 	
-	if($scope.parameters != null){
+	if(paramsCache != null){
+		$scope.parameters = paramsCache;
 		$scope.setParameters();
 	}
 })
