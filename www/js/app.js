@@ -79,6 +79,16 @@ dashboard
         controller: 'torrents'
       }
     }
+  })
+
+  .state('app.music', {
+    url: "/music",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/music.html",
+        controller: 'music'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/sensors');

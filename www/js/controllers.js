@@ -66,7 +66,9 @@ angular.module('starter.controllers', [])
 			$scope.error = null;
             $scope.message = 'Login successful !';
 			$scope.loginModal.hide();
-            $scope.$apply();
+			if(!$scope.$$phase){
+				$scope.$apply();
+			}
 			$rootScope.$broadcast("authenticated");
 			$ionicLoading.hide();
 		}, function(data) {

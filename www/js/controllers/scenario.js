@@ -136,7 +136,9 @@ dashboard.controller('scenario', function ($scope, $ionicModal, $ionicScrollDele
     scenarioModel.getAll().then(function(scenarios){
         $scope.scenarios = scenarios;
     	$scope.loading = false;
-        $scope.$apply();
+		if(!$scope.$$phase){
+			$scope.$apply();
+		}
     });
 
     $scope.run = function(){

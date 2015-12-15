@@ -627,6 +627,12 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
             alfredWebsocket.send("MediaManager_UpdateStatus", args);
         }
     };
+	
+	Service.Music = {
+        directPlay: function (music) {
+            alfredWebsocket.send("MediaManager_DirectPlay", music);
+        }
+    };
     
     Service.ping = function(){
         alfredWebsocket.sendRaw('ping');
