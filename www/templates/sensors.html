@@ -2,73 +2,74 @@
 	
 	<ion-content scroll="false">
 		<ion-spinner ng-show="loading" class="spinner-centered"></ion-spinner>
-		<tab-slide-box ng-show="!loading">
-			<div class="tsb-icons">
-				<div class="tsb-ic-wrp">
-					<a href="javascript:;" class="ion-thermometer"></a>
-					<a href="javascript:;" class="ion-person-stalker"></a>
-					<a href="javascript:;" class="ion-email"></a>
+		<ion-tabs class="tabs-balanced tabs-icon-only">
+
+		  <ion-tab title="Home" icon="ion-thermometer">
+			<ion-content class="padding">
+				<h2>Capteurs</h2>
+				<div class="card">
+					<div class="item item-divider item-balanced">
+						Température
+					</div>
+					<div class="item item-text-wrap">
+						{{ temperature }}<sup style="font-size: 20px">°C</sup>
+					</div>
+					<div class="item item-divider item-positive">
+						{{ temperatureComment }}
+					</div>
 				</div>
-			</div>
-			<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
-				<ion-slide>
-					<h2>Capteurs</h2>
-					<div class="card">
-						<div class="item item-divider item-balanced">
-							Température
-						</div>
-						<div class="item item-text-wrap">
-							{{ temperature }}<sup style="font-size: 20px">°C</sup>
-						</div>
-						<div class="item item-divider item-positive">
-							{{ temperatureComment }}
-						</div>
+				
+				<div class="card">
+					<div class="item item-divider item-balanced">
+						Humidité
 					</div>
-					
-					<div class="card">
-						<div class="item item-divider item-balanced">
-							Humidité
-						</div>
-						<div class="item item-text-wrap">
-							{{ humidity }}<sup style="font-size: 20px">%</sup>
-						</div>
-						<div class="item item-divider item-positive">
-							{{ humidityComment }}
-						</div>
+					<div class="item item-text-wrap">
+						{{ humidity }}<sup style="font-size: 20px">%</sup>
 					</div>
-				</ion-slide>
-				<ion-slide>
-					<h2>Bienvenue {{user.login}}</h2>					
-					<div class="card">
-						<div class="item item-divider item-balanced">
-							People
-						</div>
-						<div class="item item-text-wrap">				
-							<h3>{{ someoneThere == 'True' ? 'Youpie !' : 'Too bad' }}</h3>
-							{{ someoneThere == 'True' ? 'Someone\'s at the NAM!' : 'The NAM is empty :(' }}
-						</div>
-						<div class="item item-divider item-positive">
-							{{ someoneThere == 'True' ? 'Let\'s get started ! :)' : 'Bring friends ASAP !' }}
-						</div>
+					<div class="item item-divider item-positive">
+						{{ humidityComment }}
 					</div>
-					<form>
-						<h4>Envoyer un message au NAM :</h4>
-						<div class="list">
-						  <div class="item item-input-inset">
-							<label class="item-input-wrapper">
-								<input type="text" ng-model="text">
-							</label>
-							<button class="button button-small button-positive" ng-click="speech()">
-							  <span class="ion-speakerphone"></span>
-							</button>
-						  </div>
-						</div>
-					</form>
-				</ion-slide>
-				<ion-slide>
-					<h2>Aucun nouveau message</h2>		
-				</ion-slide>
-			</ion-slide-box>
-		</tab-slide-box>
+				</div>
+			</ion-content>
+		  </ion-tab>
+
+		  <ion-tab title="Home" icon="ion-person-stalker">
+			<ion-content class="padding">
+				<h2>Bienvenue {{user.login}}</h2>					
+				<div class="card">
+					<div class="item item-divider item-balanced">
+						People
+					</div>
+					<div class="item item-text-wrap">				
+						<h3>{{ someoneThere == 'True' ? 'Youpie !' : 'Too bad' }}</h3>
+						{{ someoneThere == 'True' ? 'Someone\'s at the NAM!' : 'The NAM is empty :(' }}
+					</div>
+					<div class="item item-divider item-positive">
+						{{ someoneThere == 'True' ? 'Let\'s get started ! :)' : 'Bring friends ASAP !' }}
+					</div>
+				</div>
+				<form>
+					<h4>Envoyer un message au NAM :</h4>
+					<div class="list">
+					  <div class="item item-input-inset">
+						<label class="item-input-wrapper">
+							<input type="text" ng-model="text">
+						</label>
+						<button class="button button-small button-positive" ng-click="speech()">
+						  <span class="ion-speakerphone"></span>
+						</button>
+					  </div>
+					</div>
+				</form>
+			</ion-content>
+		  </ion-tab>
+
+		  <ion-tab title="Settings" icon="ion-email">
+			<ion-content class="padding">
+				<h2>Aucun nouveau message</h2>	
+			</ion-content>
+		  </ion-tab>
+
+		</ion-tabs>
 	</ion-content>
 </ion-view>

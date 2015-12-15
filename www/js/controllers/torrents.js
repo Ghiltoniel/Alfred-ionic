@@ -12,7 +12,10 @@ dashboard.controller('torrents', function ($scope, $ionicLoading, torrentsModel)
                 }
             }
 			$ionicLoading.hide();
-        });		
+        }, function(error){			
+			$ionicLoading.hide();
+			alert('There was a problem dureing the request');
+		});		
     }
     
     $scope.download = function(torrent){

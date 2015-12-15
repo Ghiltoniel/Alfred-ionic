@@ -4,8 +4,8 @@ dashboard.factory('torrentsModel', function($http) {
 
 function TorrentsModel($http){
     
-    var search = function(text, callback){
-        $http.get('https://yts.to/api/v2/list_movies.json?query_term=' + text).success(callback);
+    var search = function(text, callback, callbackError){
+        $http.get('https://yts.to/api/v2/list_movies.json?query_term=' + text).then(callback, callbackError);
     }
     
     var download = function(torrentHash, torrentName, callback){

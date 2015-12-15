@@ -13,7 +13,11 @@ alfred.service('alfredAuth', function() {
         },
         setUser: function(newUser) {
             user = newUser;
-			localStorage.setItem('alfred-user', JSON.stringify(user));
+			if(user == null){
+				localStorage.removeItem('alfred-user');
+			} else{
+				localStorage.setItem('alfred-user', JSON.stringify(user));
+			}
         },
         isConnected: function() {
             return !!user;
@@ -49,6 +53,7 @@ alfred.factory('alfredWebsocket', function($q) {
     Service.callbacks = [];
     Service.callbacksOpen = [];
     Service.callbacksClose = [];
+    Service.callbacksErrors = [];
     var defer = null;
     var ws;
 
@@ -79,7 +84,7 @@ alfred.factory('alfredWebsocket', function($q) {
             }
         };
 
-        ws.onclose = function(){
+        ws.onclose = function(event){
             console.log("Socket has been closed!");
             var refreshIntervalId = setInterval(
                 function () {
@@ -97,6 +102,12 @@ alfred.factory('alfredWebsocket', function($q) {
                 Service.callbacksClose[i]();
             }
         };
+		
+		ws.onerror = function(e){
+            for(var i=0;i<Service.callbacksErrors.length;i++){
+                Service.callbacksErrors[i](e);
+            }
+		};
     }
 
     function sendRequest(request) {
@@ -186,8 +197,32 @@ alfred.factory('alfredWebsocket', function($q) {
         }
     }
 
+    Service.subscribeError = function(callback) {
+        if(callback){
+            Service.callbacksErrors.push(callback);
+        }
+    }
+
     return Service;
 });
+
+alfred.factory('sessionInjector', function() {  
+    var sessionInjector = {
+        request: function(config) {
+			var localUser = localStorage.getItem("alfred-user");
+			if (localUser != null) {
+				var user = JSON.parse(localUser);
+                config.headers['token'] = user.token;
+			}
+            return config;
+        }
+    };
+    return sessionInjector;
+});
+
+alfred.config(['$httpProvider', function($httpProvider) {  
+    $httpProvider.interceptors.push('sessionInjector');
+}]);
 
 
 alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParams, $q, $http) {
@@ -202,10 +237,12 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
         parameters.portWebSocket = parameters.portWebSocket || 13100;
         parameters.portHttp = parameters.portHttp || 80;
         parameters.onConnect = parameters.onConnect || null;
-        parameters.onDisconnect = parameters.onDisconnect || null;  
+        parameters.onDisconnect = parameters.onDisconnect || null;
+        parameters.onError = parameters.onError || null;   
         
         alfredWebsocket.subscribeOpen(parameters.onConnect);
         alfredWebsocket.subscribeClose(parameters.onDisconnect);
+        alfredWebsocket.subscribeError(parameters.onError);
         alfredWebsocket.init(parameters);
     
         Service.parameters = parameters;
@@ -289,6 +326,7 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
                 else if(data != null
                     && data.Command == 'Logout'){
                     alfredWebsocket.unsubscribe(callback);
+					alfredAuth.setUser(null);
                     deferred.resolve(data);
                 }
             };
@@ -333,6 +371,28 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
             alfredWebsocket.subscribe(callback);
             return deferred.promise;
         },
+		
+		getAllInterfaces: function(){
+            return $http.get(Service.parameters.url + '/device/interfaces');			
+		},
+		
+		saveInterfaces: function(lights){
+            return $http.post(Service.parameters.url + '/device/saveInterfaces',
+    		JSON.stringify(lights),
+    		{
+    			headers: {
+    				'Content-Type': 'application/json'
+    			}
+    		});
+        },
+		
+		getHueBridges: function(){
+            return $http.get(Service.parameters.url + '/device/hue/bridges');			
+		},
+		
+		registerHueBridge: function(ip){
+            return $http.get(Service.parameters.url + '/device/hue/bridges/' + ip + '/register');			
+		},
         
         allumeTout: function () {
             alfredWebsocket.send("Device_AllumeTout");
@@ -455,7 +515,7 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
         },
     
         save: function(scenario){
-            $http.post('http://' + parameters.host + '/scenario/save',
+            $http.post(Service.parameters.url + '/scenario/save',
     		JSON.stringify(scenario),
     		{
     			headers: {
@@ -464,6 +524,30 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
     		});
         }
     };
+	
+	Service.Configuration = {
+		getAll: function(){
+            return $http.get(Service.parameters.url + '/configuration');			
+		},
+		save: function(config){
+            return $http.post(Service.parameters.url + '/configuration/save',
+    		JSON.stringify(config),
+    		{
+    			headers: {
+    				'Content-Type': 'application/json'
+    			}
+    		});
+        },
+		saveAll: function(configs){
+            return $http.post(Service.parameters.url + '/configuration/saveBatch',
+    		JSON.stringify(configs),
+    		{
+    			headers: {
+    				'Content-Type': 'application/json'
+    			}
+    		});
+        }
+	};
     
     Service.Torrent = {
         search: function(term, callback){
@@ -473,7 +557,7 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
         download: function(torrentHash, torrentName){
             var tracker = 'udp://open.demonii.com:1337';
             var magnet = 'magnet:?xt=urn:btih:' + torrentHash + '&dn=' + encodeURI(torrentName) + '&tr=' + tracker;
-            $http.get('http://' + parameters.host + "/torrent/download?magnet=" + magnet);
+            $http.get(Service.parameters.url + "/torrent/download?magnet=" + magnet);
         }
     };
     

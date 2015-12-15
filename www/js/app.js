@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-dashboard = angular.module('starter', ['ionic', 'tabSlideBox', 'starter.controllers', 'alfred']);
+dashboard = angular.module('starter', ['ionic', 'starter.controllers', 'alfred']);
 
 dashboard
 .run(function($ionicPlatform, alfredClient) {
@@ -82,4 +82,8 @@ dashboard
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/sensors');
+})
+
+.config(function($ionicConfigProvider) {
+    $ionicConfigProvider.tabs.position('bottom');
 });

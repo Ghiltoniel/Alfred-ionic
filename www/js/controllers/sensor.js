@@ -112,36 +112,38 @@ dashboard.controller('sensorInfos', function ($rootScope, $scope, $ionicLoading,
             loaded();
             $scope.sensors = sensors;
             $scope.sensor = sensors[0];
-    
-            alfredClient.Sensors.getHistory(sensors[0].Id);
-            alfredClient.Sensors.getHistory(sensors[1].Id).then(function(sensor, type){
-                loaded();
-                var lastDate;
-                var lastValue;
-                var history = JSON.parse(sensor.history);
-                for(var i in history) {
-                    var newDate = new Date(i);
-                    if(!lastDate || lastDate < newDate){
-                        lastValue = Math.round(history[i] * 100) / 100;
-                        lastDate = newDate;
-                    }
-                }
-    
-                if(sensor.type == 'Temperature'){
-                    $scope.temperature = lastValue;
-                    if(lastValue > 20){
-                        $scope.temperatureComment = "It's quite nice out here !";
-                    }
-                    else{
-                        $scope.temperatureComment = "It's getting freezy out here !";
-                    }
-                }
-                if(sensor.type == 'Humidity'){
-                    $scope.humidity = lastValue;
-                    $scope.humidityComment = 'Everything\'s normal !';
-                }
-                $scope.$apply();
-            });
+			
+			if(sensors.length){
+				alfredClient.Sensors.getHistory(sensors[0].Id);
+				alfredClient.Sensors.getHistory(sensors[1].Id).then(function(sensor, type){
+					loaded();
+					var lastDate;
+					var lastValue;
+					var history = JSON.parse(sensor.history);
+					for(var i in history) {
+						var newDate = new Date(i);
+						if(!lastDate || lastDate < newDate){
+							lastValue = Math.round(history[i] * 100) / 100;
+							lastDate = newDate;
+						}
+					}
+		
+					if(sensor.type == 'Temperature'){
+						$scope.temperature = lastValue;
+						if(lastValue > 20){
+							$scope.temperatureComment = "It's quite nice out here !";
+						}
+						else{
+							$scope.temperatureComment = "It's getting freezy out here !";
+						}
+					}
+					if(sensor.type == 'Humidity'){
+						$scope.humidity = lastValue;
+						$scope.humidityComment = 'Everything\'s normal !';
+					}
+					$scope.$apply();
+				});
+			}
         });
 	};
 		
@@ -161,7 +163,9 @@ dashboard.controller('sensorInfos', function ($rootScope, $scope, $ionicLoading,
     
     function loaded(){
         $scope.loading = false;
-        $scope.$apply();
+		if(!$scope.$$phase) {
+			$scope.$apply();
+		}
 
 		ionic.trigger('resize', {target: window});
     }

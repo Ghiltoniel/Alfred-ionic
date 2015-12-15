@@ -23,6 +23,10 @@
 	background: rgb(60,173,155);
 }
 
+.tabs-balanced > .tabs, .tabs-striped.tabs-balanced > .tabs{
+	background-color:rgb(47,51,62);
+}
+
 .menu .item {
 	background: rgba(0,0,0,0);
 	border: none;
