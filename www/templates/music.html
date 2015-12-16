@@ -1,7 +1,7 @@
 <ion-view title="Music">
   <ion-pane>
       
-    <ion-tabs class="tabs-icon-top tabs-positive tabs-bottom">
+    <ion-tabs class="tabs-icon-top tabs-balanced tabs-bottom">
 
 		<ion-tab title="Search" icon="ion-stats-bars">
 		
@@ -9,7 +9,7 @@
 				<form ng-submit="search(term)">
 					<div class="item item-input-inset">
 						<label class="item-input-wrapper">
-						  <input type="text" placeholder="Recherche" ng-model="term" autofocus>
+						  <input type="text" placeholder="Recherche" ng-model="term" autofocus ng-change="search(term)">
 						</label>
 						<button class="button button-small">
 						  Search
@@ -19,11 +19,26 @@
 			</div>
 			
 			<ion-content has-header="true" class="has-subheader">
+				<div id="radios" ng-show="!results">
+					<div class="card" ng-repeat="r in radios">
+					  <div class="item item-divider">
+						<h2>{{r.BaseName}}</h2>
+					  </div>
+
+					  <div class="item item-image">
+						<img src="{{r.ThumbnailUrl}}" class="radio-thumbnail">
+					  </div>
+
+					  <button class="item item-icon-left assertive" ng-click="startRadio(r)">
+						<i class="icon ion-music-note"></i>
+						Start listening
+					  </button>
+					</div>
+				</div>
 				<ion-list>
-				  <ion-item class="item-icon-right item-thumbnail-left" ng-repeat="r in results" type="item-text-wrap">
+				  <ion-item class="item-icon-right item-thumbnail-left" ng-repeat="r in results" type="item-text-wrap" ng-click="suggest(r)">
 					<img src="{{r.snippet.thumbnails.default.url}}">
 					{{r.snippet.title}}
-					<i class="icon ion-ios-plus-outline" ng-click="suggest(r)"></i>
 				  </ion-item>
 				</ion-list>
 			</ion-content>
@@ -31,17 +46,28 @@
 		</ion-tab>
 
 		<ion-tab title="En cours" icon="ion-music-note">
-	
-			<ion-content has-header="true" class="tabs-list">
+			
+			<div class="bar bar-subheader" id="player">
+			  <ion-item class="item-icon-right" ng-show="current.Title" type="item-text-wrap">
+				<h2>{{current.Title}}</h2>
+				<i class="icon ion-music-note"></i>
+			  </ion-item>
+			  <div id="palyer-controls" ng-show="current.Title">
+				<div class="item range">
+				  <input type="range" name="volume" ng-model="status.Position">
+				</div>
+				<div class="button-bar">
+				  <a class="button icon-left ion-skip-backward" ng-click="previous();">Previous</a>
+				  <a class="button icon-left ion-ios-play" ng-click="playPause();">{{status.Status == 3 ? 'Pause' : 'Play' }}</a>
+				  <a class="button icon-left ion-skip-forward" ng-click="next();">Next</a>
+				</div>
+			  </div>
+			</div>
+			
+			<ion-content id="playlist" has-header="true" class="tabs-list has-subheader">
 				<ion-list>
-				  <ion-item class="item-icon-right item-thumbnail-left" ng-show="current.title" type="item-text-wrap">
-				    <img src="{{current.thumbnail}}">
-					<h2>{{current.title}}</h2>
-					<i class="icon ion-music-note"></i>
-				  </ion-item>
-				  <ion-item class="item-icon-right item-avatar" ng-repeat="v in upcomings" type="item-text-wrap">
-				    <img src="{{v.thumbnail}}">
-					<h2>{{v.title}}</h2>
+				  <ion-item class="item-icon-right" ng-repeat="(i, song) in playlist" type="item-text-wrap" ng-if="i>0">
+					<h2>{{song.Title}}</h2>
 				  </ion-item>
 				</ion-list>
 			</ion-content>

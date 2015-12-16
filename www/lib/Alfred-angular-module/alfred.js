@@ -93,7 +93,7 @@ alfred.factory('alfredWebsocket', function($q) {
                         clearInterval(refreshIntervalId);
 
                     } else if(ws.readyState === 3) {
-                        createWebsocket();
+                        createWebsocket(url);
                     }
 
                 }, 1000); // wait 1 second for the connection...
@@ -629,8 +629,17 @@ alfred.factory('alfredClient', function(alfredWebsocket, alfredAuth, alfredParam
     };
 	
 	Service.Music = {
+		broadcastStatus: function(){
+			alfredWebsocket.send("MediaManager_BroadcastStatus");
+		},
         directPlay: function (music) {
             alfredWebsocket.send("MediaManager_DirectPlay", music);
+        },
+        addToEnd: function (music) {
+            alfredWebsocket.send("MediaManager_AddToPlaylist", music);
+        },
+        addToEndAndPlay: function (music) {
+            alfredWebsocket.send("MediaManager_AddToPlaylistAndPlay", music);
         }
     };
     
