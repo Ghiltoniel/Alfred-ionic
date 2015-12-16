@@ -83,15 +83,23 @@ dashboard.controller('music', function($rootScope, $scope, $http, $log, $locatio
 		.error( function () {
 		});
 	
-	$scope.$watch($scope.status, function(newValue, oldValue, scope){
-		if(newValue == 3 && oldValue != 3){
+	$scope.$watch('status', function(newValue, oldValue, scope){
+		if(newValue.Status == 3){
 			if(timerRef){
 				clearTimeout(timerRef);
 			}
 			
 			timerRef = setInterval(function(){
 				$scope.status.Position += 1;
+				if(!$scope.$$phase){
+					$scope.$apply();
+				}
 			}, 1000);
+		}
+		else{
+			if(timerRef){
+				clearTimeout(timerRef);
+			}
 		}
 	});
 	

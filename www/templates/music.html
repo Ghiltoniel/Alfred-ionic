@@ -54,7 +54,7 @@
 			  </ion-item>
 			  <div id="palyer-controls" ng-show="current.Title">
 				<div class="item range">
-				  <input type="range" name="volume" ng-model="status.Position">
+				  <input type="range" name="volume" ng-model="status.Position" min="0" max="{{status.Length}}">
 				</div>
 				<div class="button-bar">
 				  <a class="button icon-left ion-skip-backward" ng-click="previous();">Previous</a>
