@@ -1,8 +1,8 @@
 dashboard.factory('musicModel', ['$http', 'alfredClient', function($http, alfredClient) {
-    return new LightModel($http, alfredClient);
+    return new MusicModel($http, alfredClient);
 }]);
 
-function LightModel($http, alfredClient){
+function MusicModel($http, alfredClient){
 
     var search = function(term){
 		return $http.get('https://www.googleapis.com/youtube/v3/search', {

@@ -172,6 +172,7 @@ input[type="color"] {
 
 .radio-thumbnail{
 	max-width:200px;
+	width: auto !important;
 	margin:auto;
 	display:block;
 }
