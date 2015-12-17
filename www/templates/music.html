@@ -50,15 +50,14 @@
 			<div class="bar bar-subheader" id="player">
 			  <ion-item class="item-icon-right" ng-show="current.Title" type="item-text-wrap">
 				<h2>{{current.Title}}</h2>
-				<i class="icon ion-music-note"></i>
 			  </ion-item>
 			  <div id="palyer-controls" ng-show="current.Title">
 				<div class="item range">
-				  <input type="range" name="volume" ng-model="status.Position" min="0" max="{{status.Length}}">
+				  <input type="range" name="volume" ng-change="setPosition()" ng-model="status.Position" min="0" max="{{status.Length}}">
 				</div>
 				<div class="button-bar">
 				  <a class="button icon-left ion-skip-backward" ng-click="previous();">Previous</a>
-				  <a class="button icon-left ion-ios-play" ng-click="playPause();">{{status.Status == 3 ? 'Pause' : 'Play' }}</a>
+				  <a class="button icon-left" ng-class="status.Status == 3 ? 'ion-ios-pause' : 'ion-ios-play'" ng-click="playPause();">{{status.Status == 3 ? 'Pause' : 'Play' }}</a>
 				  <a class="button icon-left ion-skip-forward" ng-click="next();">Next</a>
 				</div>
 			  </div>
@@ -66,8 +65,12 @@
 			
 			<ion-content id="playlist" has-header="true" class="tabs-list has-subheader">
 				<ion-list>
-				  <ion-item class="item-icon-right" ng-repeat="(i, song) in playlist" type="item-text-wrap" ng-if="i>0">
+				  <ion-item class="item-icon-right" ng-class="i == status.CurrentPlaylistIndex ? 'current' : ''" ng-repeat="(i, song) in playlist" type="item-text-wrap" ng-click="goPlaylist(i)">
 					<h2>{{song.Title}}</h2>
+					<i ng-show="i == status.CurrentPlaylistIndex" class="icon ion-music-note"></i>
+					<ion-option-button class="button-assertive" ng-click="deleteFromPlaylist(i)">
+					  Delete
+					</ion-option-button>
 				  </ion-item>
 				</ion-list>
 			</ion-content>

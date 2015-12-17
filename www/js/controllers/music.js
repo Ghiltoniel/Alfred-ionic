@@ -53,13 +53,44 @@ dashboard.controller('music', function($rootScope, $scope, $http, $log, $locatio
 	
 	$scope.startRadio = function(radio){
 		if(!radio.hasSubRadios){
-			
-			alfredClient.Music.directPlay({
-				file: radio.BaseUrl,
-				title: radio.DisplayName,
-				artist: radio.DisplayName,
-				album: radio.DisplayName
-			});
+			var myPopup = $ionicPopup.show({
+				template: 'How would you like to play the song ?',
+				title: 'Play that song',
+				scope: $scope,
+				buttons: [
+				  { 
+					text: 'Now !',
+					type: 'button-balanced',
+					onTap: function(e) {
+						
+						alfredClient.Music.directPlay({
+							file: radio.BaseUrl,
+							title: radio.DisplayName,
+							artist: radio.DisplayName,
+							album: radio.DisplayName
+						});
+					},
+				  },
+				  {
+					text: 'Add to end',
+					type: 'button-positive',
+					onTap: function(e) {
+						alfredClient.Music.addToEnd({
+							file: radio.BaseUrl,
+							title: radio.DisplayName,
+							artist: radio.DisplayName,
+							album: radio.DisplayName
+						});
+					}
+				  },
+				  { 
+					text: 'Cancel',
+					onTap: function(e) {
+						myPopup.close();
+					},
+				  },
+				]
+		    });
 		}
 	};
 	
@@ -67,8 +98,8 @@ dashboard.controller('music', function($rootScope, $scope, $http, $log, $locatio
 		$scope.playlist = playlist;
 		$scope.status = status;
 		
-		if($scope.playlist[0]){
-			$scope.current = $scope.playlist[0];
+		if($scope.playlist[status.CurrentPlaylistIndex]){
+			$scope.current = $scope.playlist[status.CurrentPlaylistIndex];
 		}
 		
 		if(!$scope.$$phase){
@@ -107,12 +138,27 @@ dashboard.controller('music', function($rootScope, $scope, $http, $log, $locatio
 		alfredClient.Player.sendPlayPauseSignal();
 	};
 	
+	$scope.setPosition = function() {
+		alfredClient.Music.setPosition($scope.status.Position);
+		if(timerRef){
+			clearTimeout(timerRef);
+		}
+	};
+	
 	$scope.next = function() {
 		alfredClient.Player.sendNextSongSignal();
 	};
 	
 	$scope.previous = function() {
 		alfredClient.Player.sendPreviousSongSignal();
+	};
+	
+	$scope.goPlaylist = function(index){		
+		alfredClient.Music.goPlaylist(index);
+	};
+	
+	$scope.deleteFromPlaylist = function(index) {
+		alfredClient.Music.deleteFromPlaylist(index);
 	};
 	
 	alfredClient.Music.broadcastStatus();

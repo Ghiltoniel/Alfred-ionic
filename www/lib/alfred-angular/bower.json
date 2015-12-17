@@ -1,5 +1,6 @@
 {
   "name": "alfred-angular",
+  "version": "1.0.0",
   "homepage": "https://github.com/Ghiltoniel/Alfred-angular-module",
   "authors": [
     "Guillaume Jacquart <guillaume.jacquart@live.fr>"
@@ -18,14 +19,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "_release": "5c9b33c0d5",
-  "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "5c9b33c0d5416054c3bf428482f62d79754d7d0b"
-  },
-  "_source": "https://github.com/Ghiltoniel/Alfred-angular-module.git",
-  "_target": "*",
-  "_originalSource": "https://github.com/Ghiltoniel/Alfred-angular-module.git"
+  ]
 }

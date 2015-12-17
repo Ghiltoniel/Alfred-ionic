@@ -160,6 +160,7 @@ input[type="color"] {
 	background:white;
 	border:none;
 	height: auto;
+	padding: 8px 8px 0 8px;
 }
 
 #player .item{
@@ -168,6 +169,14 @@ input[type="color"] {
 
 #playlist {
     top: 183px;
+}
+
+#playlist .item-complex.current .item-content{
+	background-color:rgba(47,51,80, 0.8);
+}
+
+#playlist .item-complex.current .item-content > h2, #playlist .item-complex.current .item-content > i{
+	color:white;
 }
 
 .radio-thumbnail{
